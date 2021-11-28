@@ -41,10 +41,10 @@ call plug#begin()
 Plug 'chriskempson/base16-vim'
 Plug 'neoclide/coc.nvim'
 Plug 'preservim/nerdtree'
-Plug 'ryanoasis/vim-devicons'
 Plug 'tpope/vim-commentary'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
