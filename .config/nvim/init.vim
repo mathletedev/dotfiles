@@ -16,6 +16,8 @@ nnoremap <leader>d <c-w>l
 nnoremap <leader>k :bn<cr>
 nnoremap <leader>j :bp<cr>
 nnoremap <leader>q :bd<cr>
+nnoremap <leader>. <c-w><s-.>
+nnoremap <leader>, <c-w><s-,>
 
 nnoremap <leader>y :%y<cr>
 
@@ -54,10 +56,10 @@ set termguicolors
 inoremap <silent><expr> <c-space> coc#refresh()
 inoremap <expr> <tab> pumvisible() ? "<c-n>" : "<tab>"
 inoremap <expr> <s-tab> pumvisible() ? "<c-p>" : "<tab>"
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+autocmd BufWritePre * Prettier
 
-let g:NERDTreeQuitOnOpen=1
 nnoremap <leader>n :NERDTree<cr>
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-
