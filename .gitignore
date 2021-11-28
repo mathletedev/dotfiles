@@ -2,9 +2,9 @@
 !.bashrc
 !.gitignore
 !README.md
-!.config/fish/config.fish
-!.config/fish/functions/fish_greeting.fish
-!.config/fish/functions/fish_user_key_bindings.fish
-!.config/kitty/kitty.conf
-!.config/nvim/init.vim
+!/.config/fish/config.fish
+!/.config/fish/functions/fish_greeting.fish
+!/.config/fish/functions/fish_user_key_bindings.fish
+!/.config/kitty/kitty.conf
+!/.config/nvim/init.vim
 
