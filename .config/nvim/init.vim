@@ -13,9 +13,9 @@ nnoremap <leader>w <c-w>k
 nnoremap <leader>a <c-w>h
 nnoremap <leader>s <c-w>j
 nnoremap <leader>d <c-w>l
-nnoremap <leader>k :bn<cr>
-nnoremap <leader>j :bp<cr>
-nnoremap <leader>q :bd<cr>
+nnoremap <silent> <leader>k :bn<cr>
+nnoremap <silent> <leader>j :bp<cr>
+nnoremap <silent> <leader>q :bd<cr>
 nnoremap <leader>. <c-w><s-.>
 nnoremap <leader>, <c-w><s-,>
 
@@ -40,17 +40,18 @@ noremap <silent><expr> k (v:count == 0 ? "gk" : "k")
 
 call plug#begin()
 
-Plug 'chriskempson/base16-vim'
 Plug 'neoclide/coc.nvim'
 Plug 'preservim/nerdtree'
+Plug 'rakr/vim-one'
 Plug 'tpope/vim-commentary'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
 Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
-colorscheme base16-nord
+colorscheme one
 set termguicolors
 
 inoremap <silent><expr> <c-space> coc#refresh()
