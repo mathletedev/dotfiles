@@ -6,6 +6,7 @@ set relativenumber
 set cursorline
 set tabstop=2
 set shiftwidth=2
+set hidden
 
 let mapleader = "\<space>"
 
@@ -31,12 +32,13 @@ autocmd filetype java nnoremap <leader>e :term java %:r<cr>
 autocmd filetype javascript nnoremap <leader>e :term node %<cr>
 autocmd filetype python nnoremap <leader>e :term python3 %<cr>
 
-autocmd TermOpen * startinsert
+autocmd insertenter * :set norelativenumber
+autocmd insertleave * :set relativenumber
 
-autocmd InsertEnter * :set norelativenumber
-autocmd InsertLeave * :set relativenumber
-noremap <silent><expr> j (v:count == 0 ? "gj" : "j")
-noremap <silent><expr> k (v:count == 0 ? "gk" : "k")
+noremap <expr> j (v:count == 0 ? "gj" : "j")
+noremap <expr> k (v:count == 0 ? "gk" : "k")
+
+autocmd termopen * startinsert
 
 call plug#begin()
 
@@ -51,16 +53,19 @@ Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
-colorscheme one
-set termguicolors
-
-inoremap <silent><expr> <c-space> coc#refresh()
+let g:coc_global_extensions = ['coc-pairs', 'coc-tsserver', 'coc-prettier']
+autocmd bufwritepre * silent call CocAction('runCommand', 'editor.action.organizeImport')
+inoremap <expr> <c-space> coc#refresh()
+inoremap <expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<cr>"
 inoremap <expr> <tab> pumvisible() ? "<c-n>" : "<tab>"
 inoremap <expr> <s-tab> pumvisible() ? "<c-p>" : "<tab>"
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-autocmd BufWritePre * Prettier
+nnoremap <silent> <leader>h :call CocAction('doHover')<cr>
 
+let NERDTreeShowHidden=1
 nnoremap <leader>n :NERDTree<cr>
+
+colorscheme one
+set termguicolors
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1

@@ -1,6 +1,7 @@
 *
 !.bashrc
 !.gitignore
+!.tmux.conf
 !README.md
 !.config
 !.config/fish
