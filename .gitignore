@@ -12,5 +12,5 @@
 !.config/kitty
 !.config/kitty/kitty.conf
 !.config/nvim
-!.config/nvim/coc-config.json
+!.config/nvim/coc-settings.json
 !.config/nvim/init.vim
