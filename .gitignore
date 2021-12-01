@@ -10,6 +10,7 @@
 !.config/fish/functions/fish_greeting.fish
 !.config/fish/functions/fish_user_key_bindings.fish
 !.config/kitty
+!.config/kitty/current-theme.conf
 !.config/kitty/kitty.conf
 !.config/nvim
 !.config/nvim/coc-settings.json
