@@ -32,8 +32,8 @@ autocmd filetype java nnoremap <leader>e :term java %:r<cr>
 autocmd filetype javascript nnoremap <leader>e :term node %<cr>
 autocmd filetype python nnoremap <leader>e :term python3 %<cr>
 
-autocmd insertenter * :set norelativenumber
-autocmd insertleave * :set relativenumber
+autocmd insertenter * set norelativenumber
+autocmd insertleave * set relativenumber
 
 noremap <expr> j (v:count == 0 ? "gj" : "j")
 noremap <expr> k (v:count == 0 ? "gk" : "k")
