@@ -1,3 +1,4 @@
+set -gx EDITOR nvim
 set -g theme_color_scheme nord
 
 alias la="ls -la"
