@@ -62,6 +62,8 @@ inoremap <expr> <s-tab> pumvisible() ? "<c-p>" : "<tab>"
 nnoremap <silent> <leader>h :call CocAction('doHover')<cr>
 
 let NERDTreeShowHidden=1
+let g:NERDTreeDirArrowExpandable = '+'
+let g:NERDTreeDirArrowCollapsible = '~'
 nnoremap <leader>n :NERDTree<cr>
 
 colorscheme one
