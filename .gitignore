@@ -1,9 +1,5 @@
 *
 !.bashrc
-!.gitconfig
-!.gitignore
-!.tmux.conf
-!README.md
 !.config
 !.config/fish
 !.config/fish/config.fish
@@ -16,3 +12,11 @@
 !.config/nvim
 !.config/nvim/coc-settings.json
 !.config/nvim/init.vim
+!.config/starfish.toml
+!.gitconfig
+!.gitignore
+!.tmux.conf
+!.xmonad
+!.xmonad/xmonad.hs
+!.xprofile
+!README.md
