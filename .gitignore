@@ -12,7 +12,9 @@
 !.config/nvim
 !.config/nvim/coc-settings.json
 !.config/nvim/init.vim
-!.config/starfish.toml
+!.config/picom
+!.config/picom/picom.conf
+!.config/starship.toml
 !.config/xmobar
 !.config/xmobar/xmobarrc
 !.gitconfig

@@ -32,6 +32,8 @@ autocmd filetype java nnoremap <leader>e :term java %:r<cr>
 autocmd filetype javascript nnoremap <leader>e :term node %<cr>
 autocmd filetype python nnoremap <leader>e :term python3 %<cr>
 
+autocmd filetype haskell setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
+
 autocmd insertenter * set norelativenumber
 autocmd insertleave * set relativenumber
 
