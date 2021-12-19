@@ -1,0 +1,7 @@
+Config { font = "xft:Mononoki:pixelsize=12:antialias=true:hinting=true"
+       , position = TopSize L 100 24
+       , bgColor = "#0997b3"
+       , fgColor = "#50a14f"
+       , lowerOnStart = True
+			 , template = "aaaaa"
+       }

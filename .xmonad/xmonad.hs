@@ -1,21 +1,27 @@
+import System.IO
 import XMonad
+import XMonad.Util.Run
 import XMonad.Hooks.DynamicLog
+import XMonad.Layout.LayoutModifier
+import XMonad.Layout.Spacing
 
 myTerminal = "kitty"
-myModmask = mod4Mask
+
+myModMask = mod4Mask
+
 myBorderWidth = 4
-myNormalBorderColor = "#ffffff"
-myFocusedBorderColor = "#ffffff"
-myBar = "xmobar"
-myPP = xmobarPP { ppCurrent = xmobarColor "#429942" "" . wrap "|" "|" }
-myToggleStrutsKey XConfig { XMonad.modMask = modMask } = (modMask, xK_b)
+myNormalColor = "#fafafa"
+myFocusedColor = "#0997b3"
 
-main = xmonad =<< statusBar myBar myPP myToggleStrutsKey defaults
+mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
+mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True
 
-defaults = def {
-	terminal = myTerminal,
-	modMask = myModmask,
-	borderWidth = myBorderWidth,
-	normalBorderColor = myNormalBorderColor,
-	focusedBorderColor = myFocusedBorderColor
+main = do
+	xmproc <- spawnPipe "xmobar ~/.config/xmobar/xmobarrc"
+	xmonad $ def {
+		terminal = myTerminal,
+		modMask = myModMask,
+		borderWidth = myBorderWidth,
+		normalBorderColor = myNormalColor,
+		focusedBorderColor = myFocusedColor
 	}

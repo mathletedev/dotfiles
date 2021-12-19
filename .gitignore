@@ -13,6 +13,8 @@
 !.config/nvim/coc-settings.json
 !.config/nvim/init.vim
 !.config/starfish.toml
+!.config/xmobar
+!.config/xmobar/xmobarrc
 !.gitconfig
 !.gitignore
 !.tmux.conf
