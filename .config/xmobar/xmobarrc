@@ -3,5 +3,4 @@ Config { font = "xft:Mononoki:pixelsize=12:antialias=true:hinting=true"
        , bgColor = "#61afef"
        , fgColor = "#dcdfe4"
        , lowerOnStart = True
-			 , template = "test"
        }
