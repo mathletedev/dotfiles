@@ -13,13 +13,13 @@
 !.config/picom/picom.conf
 !.config/starship.toml
 !.config/xmobar
-!.config/xmobar/icons
-!.config/xmobar/icons/fynn.xpm
 !.config/xmobar/xmobarrc
 !.gitconfig
 !.gitignore
 !.tmux.conf
 !.xmonad
+!.xmonad/icons
+!.xmonad/icons/fynn.xpm
 !.xmonad/xmonad.hs
 !.xprofile
 !README.md
