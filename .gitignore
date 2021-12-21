@@ -3,9 +3,6 @@
 !.config
 !.config/fish
 !.config/fish/config.fish
-!.config/fish/functions
-!.config/fish/functions/fish_greeting.fish
-!.config/fish/functions/fish_user_key_bindings.fish
 !.config/kitty
 !.config/kitty/current-theme.conf
 !.config/kitty/kitty.conf
@@ -16,6 +13,8 @@
 !.config/picom/picom.conf
 !.config/starship.toml
 !.config/xmobar
+!.config/xmobar/icons
+!.config/xmobar/icons/fynn.xpm
 !.config/xmobar/xmobarrc
 !.gitconfig
 !.gitignore

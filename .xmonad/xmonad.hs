@@ -19,11 +19,9 @@ myTerminal = "kitty"
 
 myModMask = mod4Mask
 
-myBorderWidth = 4
-myNormalColor = "#fafafa"
-myFocusedColor = "#61afef"
+myBorderWidth = 0
 
-myWorkspaces = ["main", "dev", "web", "social", "tools"]
+myWorkspaces = [" main ", " dev ", " web ", " social ", " tools "]
 
 mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True
 
@@ -61,14 +59,17 @@ main = do
         terminal = myTerminal,
         modMask = myModMask,
         borderWidth = myBorderWidth,
-        normalBorderColor = myNormalColor,
-        focusedBorderColor = myFocusedColor,
         workspaces = myWorkspaces,
         manageHook = manageDocks <+> manageHook defaultConfig,
         layoutHook = myLayoutHook,
         handleEventHook = handleEventHook defaultConfig <+> docksEventHook,
-        logHook = dynamicLogWithPP xmobarPP {
+        logHook = dynamicLogWithPP $ xmobarPP {
             ppOutput = hPutStrLn xmproc,
-            ppTitle = xmobarColor "green" "" . shorten 50
+            ppCurrent = xmobarColor "#56b6c2" "" . wrap "<box type=Bottom width=2 mb=2 color=#56b6c2>" "</box>",
+            ppHidden = xmobarColor "#c678dd" "" . wrap "<box type=Bottom width=2 mb=2 color=#c678dd>" "</box>",
+            ppHiddenNoWindows = xmobarColor "#c678dd" "",
+            ppUrgent = xmobarColor "#e06c75" "" . wrap "!" "!",
+            ppTitle = xmobarColor "#dcdfe4" "",
+            ppSep = "<fc=#98c379> | </fc>"
         }
     } `additionalKeysP` myKeys

@@ -1,6 +1,22 @@
-Config { font = "xft:Mononoki:pixelsize=12:antialias=true:hinting=true"
-       , position = TopSize L 100 24
-       , bgColor = "#61afef"
-       , fgColor = "#dcdfe4"
-       , lowerOnStart = True
-       }
+Config {
+	font = "xft:Ubuntu:weight=bold:pixelsize=12:antialias=true:hinting=true",
+	additionalFonts = [
+		"xft:Mononoki:pixelsize=12:antialias=true:hinting=true",
+		"xft:Font Awesome 5 Free Solid:pixelsize=12"
+	]
+	position = TopSize L 100 24,
+	bgColor = "#282c34",
+	fgColor = "#dcdfe4",
+	lowerOnStart = True,
+	iconRoot = ".xmonad/icons/",
+	commands = [
+		Run StdinReader,
+		Run Cpu ["-t", "<fn=2>\xf2db</fn>  <total>%"] 20,
+		Run Memory ["-t", "<fn=2>\xf538</fn>  <used>m | <usedratio>%"] 20,
+		Run Weather "KPUW" ["-t", "<fn=2>\xf2c9</fn>  <tempC>°C"] 36000,
+		Run Date "<fn=2>\xf017</fn>  %m/%d/%Y | %H:%M:%S" "date" 10
+	],
+	sepChar = "%",
+	alignSep = "}{",
+	template = "  <icon=fynn.xpm/>    %StdinReader% }{ <box type=Bottom width=2 mb=2 color=#e06c75><fc=#e06c75><action=`kitty -e htop`>%cpu%</action></fc></box>    <box type=Bottom width=2 mb=2 color=#e5c07b><fc=#e5c07b><action=`kitty -e htop`>%memory%</action></fc></box>    <box type=Bottom width=2 mb=2 color=#61afef><fc=#61afef>%KPUW%</fc></box>    <box type=Bottom width=2 mb=2 color=#98c379><fc=#98c379>%date%</fc></box>  "
+}
