@@ -2,7 +2,7 @@ Config {
 	font = "xft:Ubuntu:weight=bold:pixelsize=12:antialias=true:hinting=true",
 	additionalFonts = [
 		"xft:Mononoki:pixelsize=12:antialias=true:hinting=true",
-		"xft:Font Awesome 5 Free Solid:pixelsize=12"
+		"xft:Font Awesome 6 Free Solid:pixelsize=12"
 	]
 	position = TopSize L 100 24,
 	bgColor = "#282c34",
@@ -13,7 +13,20 @@ Config {
 		Run StdinReader,
 		Run Cpu ["-t", "<fn=2>\xf2db</fn>  <total>%"] 20,
 		Run Memory ["-t", "<fn=2>\xf538</fn>  <used>m | <usedratio>%"] 20,
-		Run Weather "KPUW" ["-t", "<fn=2>\xf2c9</fn>  <tempC>°C"] 36000,
+		Run WeatherX "KPUW" [
+			("clear", "\xf185"),
+			("sunny", "\xf185"),
+			("fair", "\xf186"),
+			("mostly clear", "\xf6c4"),
+			("mostly sunny", "\xf6c4"),
+			("partly cloudy", "\xf6c3"),
+			("partly sunny", "\xf6c3"),
+			("mostly cloudy", "\xf73c"),
+			("cloudy", "\xf0c2"),
+			("considerable cloudiness", "\xf740"),
+			("overcast", "\xf73d"),
+			("obscured", "\xf75f")
+		] ["-t", "<fn=2>\xf2c9</fn>  <tempC>°C | <fn=2><skyConditionS></fn>"] 18000,
 		Run Date "<fn=2>\xf017</fn>  %m/%d/%Y | %H:%M:%S" "date" 10
 	],
 	sepChar = "%",
