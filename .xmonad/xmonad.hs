@@ -1,4 +1,5 @@
 import System.IO
+
 import XMonad
 import XMonad.Actions.CopyWindow (kill1)
 import XMonad.Hooks.DynamicLog
@@ -14,6 +15,8 @@ import XMonad.Layout.MultiToggle.Instances (StdTransformers(NBFULL, NOBORDERS))
 import XMonad.Layout.MultiToggle (Toggle(..))
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.Run
+
+import Graphics.X11.ExtraTypes.XF86
 
 myTerminal = "kitty"
 
@@ -50,7 +53,9 @@ myKeys = [
     ("M-<Tab>", sendMessage NextLayout),
     ("M-c", kill1),
     ("M-<Return>", spawn myTerminal),
-    ("M-<Space>", sendMessage (Toggle NBFULL) >> sendMessage ToggleStruts)
+    ("M-<Space>", sendMessage (Toggle NBFULL) >> sendMessage ToggleStruts),
+    ("<XF86AudioRaiseVolume>", spawn "amixer -D pulse set Master 10%+"),
+    ("<XF86AudioLowerVolume>", spawn "amixer -D pulse set Master 10%-")
     ]
 
 main = do

@@ -13,6 +13,7 @@ Config {
 		Run StdinReader,
 		Run Cpu ["-t", "<fn=2>\xf2db</fn>  <total>%"] 20,
 		Run Memory ["-t", "<fn=2>\xf538</fn>  <used>m | <usedratio>%"] 20,
+		Run Alsa "default" "Master" ["-t", "<fn=2>\xf028</fn>  <volume>%"],
 		Run WeatherX "KPUW" [
 			("clear", "\xf185"),
 			("sunny", "\xf185"),
@@ -31,5 +32,5 @@ Config {
 	],
 	sepChar = "%",
 	alignSep = "}{",
-	template = "  <icon=fynn.xpm/>    %StdinReader% }{ <box type=Bottom width=2 mb=2 color=#e06c75><fc=#e06c75><action=`kitty -e htop`>%cpu%</action></fc></box>    <box type=Bottom width=2 mb=2 color=#e5c07b><fc=#e5c07b><action=`kitty -e htop`>%memory%</action></fc></box>    <box type=Bottom width=2 mb=2 color=#61afef><fc=#61afef>%KPUW%</fc></box>    <box type=Bottom width=2 mb=2 color=#98c379><fc=#98c379>%date%</fc></box>  "
+	template = "  <icon=fynn.xpm/>    %StdinReader% }{ <box type=Bottom width=2 mb=2 color=#e06c75><fc=#e06c75><action=`kitty -e htop`>%cpu%</action></fc></box>    <box type=Bottom width=2 mb=2 color=#e5c07b><fc=#e5c07b><action=`kitty -e htop`>%memory%</action></fc></box>    <box type=Bottom width=2 mb=2 color=#98c379><fc=#98c379>%alsa:default:Master%</fc></box>    <box type=Bottom width=2 mb=2 color=#56b6c2><fc=#56b6c2>%KPUW%</fc></box>    <box type=Bottom width=2 mb=2 color=#61afef><fc=#61afef>%date%</fc></box>  "
 }
