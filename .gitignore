@@ -5,9 +5,6 @@
 !.config/fish/config.fish
 !.config/fish/functions
 !.config/fish/functions/fish_greeting.fish
-!.config/img
-!.config/img/background.jpg
-!.config/img/profile.png
 !.config/kitty
 !.config/kitty/current-theme.conf
 !.config/kitty/kitty.conf
@@ -27,4 +24,7 @@
 !.xmonad/icons/fynn.xpm
 !.xmonad/xmonad.hs
 !.xprofile
+!img
+!img/background.jpg
+!img/profile.png
 !README.md
