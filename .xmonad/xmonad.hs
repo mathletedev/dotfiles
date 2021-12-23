@@ -24,7 +24,7 @@ myModMask = mod4Mask
 
 myBorderWidth = 0
 
-myWorkspaces = [" main ", " dev ", " web ", " com ", " utils "]
+myWorkspaces = [" main ", " dev ", " web ", " com ", " util "]
 
 mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True
 
@@ -60,14 +60,14 @@ myKeys = [
 
 main = do
     xmproc <- spawnPipe "xmobar ~/.config/xmobar/xmobarrc"
-    xmonad $ defaultConfig {
+    xmonad $ def {
         terminal = myTerminal,
         modMask = myModMask,
         borderWidth = myBorderWidth,
         workspaces = myWorkspaces,
-        manageHook = manageDocks <+> manageHook defaultConfig,
+        manageHook = manageDocks <+> manageHook def,
         layoutHook = myLayoutHook,
-        handleEventHook = handleEventHook defaultConfig <+> docksEventHook,
+        handleEventHook = handleEventHook def <+> docksEventHook,
         logHook = dynamicLogWithPP $ xmobarPP {
             ppOutput = hPutStrLn xmproc,
             ppCurrent = xmobarColor "#56b6c2" "" . wrap "<box type=Bottom width=2 mb=2 color=#56b6c2>" "</box>",

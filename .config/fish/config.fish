@@ -1,7 +1,7 @@
 set -gx EDITOR nvim
 set -g theme_color_scheme nord
 
-alias la="ls -la"
+alias ls="exa -a --long --git"
 alias dfs="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 alias clean="clear; neofetch"
 
