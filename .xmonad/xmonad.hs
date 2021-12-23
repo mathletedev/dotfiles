@@ -24,7 +24,7 @@ myModMask = mod4Mask
 
 myBorderWidth = 0
 
-myWorkspaces = [" main ", " dev ", " web ", " com ", " util "]
+myWorkspaces = [" main ", " dev ", " web ", " com ", " util ", " host "]
 
 mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True
 
