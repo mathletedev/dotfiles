@@ -36,20 +36,20 @@ full =
 
 tall =
     renamed [Replace "tall"] $
-    mySpacing 8 $
     -- smartSpacingWithEdge 8 $
+    mySpacing 8 $
     ResizableTall 1 (3 / 100) (1 / 2) []
 
 wide =
     renamed [Replace "wide"] $
-    mySpacing 8 $
     -- smartSpacingWithEdge 8 $
+    mySpacing 8 $
     Mirror (Tall 1 (3 / 100) (1 / 2))
 
 grid =
     renamed [Replace "grid"] $
-    mySpacing 8 $
     -- smartSpacingWithEdge 8 $
+    mySpacing 8 $
     Grid (16 / 10)
 
 myLayoutHook = avoidStruts $ full ||| tall ||| wide ||| grid
@@ -61,8 +61,8 @@ myKeys = [
     ("M-b", spawn myBrowser),
     ("M-<Space>", sendMessage $ JumpToLayout "full"),
     ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+ unmute"),
-    ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%- unmute"),
-    ("<XF86AudioMute>", spawn "amixer set Master toggle")
+    ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%- unmute")
+    -- ("<XF86AudioMute>", spawn "amixer set Master toggle")
     ]
 
 main = do
