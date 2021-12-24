@@ -13,7 +13,7 @@ Config {
 		Run StdinReader,
 		Run Cpu ["-t", "<fn=2>\xf2db</fn>  <total>%"] 20,
 		Run Memory ["-t", "<fn=2>\xf538</fn>  <used>m | <usedratio>%"] 20,
-		Run Alsa "default" "Master" ["-t", "<fn=2>\xf028</fn>  <volume>%"],
+		Run Alsa "default" "Master" ["-t", "<fn=2><status></fn>  <volume>%", "--", "-O", "\xf028", "-o", "\xf6a9", "-C", "#98c379", "-c", "#98c379"],
 		Run WeatherX "KPUW" [
 			("clear", "\xf185"),
 			("sunny", "\xf185"),

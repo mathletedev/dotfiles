@@ -62,11 +62,9 @@ myKeys = [
     ("M-<Return>", spawn myTerminal),
     ("M-b", spawn myBrowser),
     -- ("M-<Space>", sendMessage $ JumpToLayout "full"),
-    -- ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+ unmute"),
-    ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+"),
-    -- ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%- unmute")
-    ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%-")
-    -- ("<XF86AudioMute>", spawn "amixer set Master toggle")
+    ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+ unmute"),
+    ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%- unmute"),
+    ("<XF86AudioMute>", spawn "amixer set Master toggle")
     ]
 
 main = do
