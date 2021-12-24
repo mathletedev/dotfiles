@@ -19,6 +19,7 @@ import XMonad.Util.Run
 import Graphics.X11.ExtraTypes.XF86
 
 myTerminal = "kitty"
+myBrowser = "firefox"
 
 myModMask = mod4Mask
 
@@ -53,6 +54,7 @@ myKeys = [
     ("M-<Tab>", sendMessage NextLayout),
     ("M-c", kill1),
     ("M-<Return>", spawn myTerminal),
+    ("M-b", spawn myBrowser),
     ("M-<Space>", sendMessage (Toggle NBFULL) >> sendMessage ToggleStruts),
     ("<XF86AudioRaiseVolume>", spawn "amixer -D pulse set Master 10%+"),
     ("<XF86AudioLowerVolume>", spawn "amixer -D pulse set Master 10%-")
