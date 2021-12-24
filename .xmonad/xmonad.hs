@@ -1,11 +1,12 @@
 import System.IO
 
-import XMonad hiding ((|||))
+-- import XMonad hiding ((|||))
+import XMonad
 import XMonad.Actions.CopyWindow (kill1)
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Layout.GridVariants (Grid(Grid))
-import XMonad.Layout.LayoutCombinators
+-- import XMonad.Layout.LayoutCombinators
 import XMonad.Layout.LayoutModifier
 import XMonad.Layout.MultiToggle (mkToggle, single, EOT(EOT), (??))
 import XMonad.Layout.MultiToggle (Toggle(..))
@@ -28,40 +29,43 @@ myBorderWidth = 0
 
 myWorkspaces = [" main ", " dev ", " web ", " com ", " util ", " host "]
 
-mySpacing i = spacingRaw True (Border i i i i) True (Border i i i i) True
+-- mySpacing i = spacingRaw True (Border i i i i) True (Border i i i i) True
 
-full =
-    renamed [Replace "full"]
-    Full
+-- full =
+    -- renamed [Replace "full"]
+    -- Full
 
 tall =
     renamed [Replace "tall"] $
-    -- smartSpacingWithEdge 8 $
-    mySpacing 8 $
+    -- mySpacing 8 $
+    smartSpacingWithEdge 8 $
     ResizableTall 1 (3 / 100) (1 / 2) []
 
 wide =
     renamed [Replace "wide"] $
-    -- smartSpacingWithEdge 8 $
-    mySpacing 8 $
+    -- mySpacing 8 $
+    smartSpacingWithEdge 8 $
     Mirror (Tall 1 (3 / 100) (1 / 2))
 
 grid =
     renamed [Replace "grid"] $
-    -- smartSpacingWithEdge 8 $
-    mySpacing 8 $
+    -- mySpacing 8 $
+    smartSpacingWithEdge 8 $
     Grid (16 / 10)
 
-myLayoutHook = avoidStruts $ full ||| tall ||| wide ||| grid
+-- myLayoutHook = avoidStruts $ full ||| tall ||| wide ||| grid
+myLayoutHook = avoidStruts $ tall ||| wide ||| grid
 
 myKeys = [
     ("M-<Tab>", sendMessage NextLayout),
     ("M-c", kill1),
     ("M-<Return>", spawn myTerminal),
     ("M-b", spawn myBrowser),
-    ("M-<Space>", sendMessage $ JumpToLayout "full"),
-    ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+ unmute"),
-    ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%- unmute")
+    -- ("M-<Space>", sendMessage $ JumpToLayout "full"),
+    -- ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+ unmute"),
+    ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+"),
+    -- ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%- unmute")
+    ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%-")
     -- ("<XF86AudioMute>", spawn "amixer set Master toggle")
     ]
 
