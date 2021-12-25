@@ -26,7 +26,7 @@ myModMask = mod4Mask
 
 myBorderWidth = 0
 
-myWorkspaces = [" main ", " dev ", " web ", " com ", " util ", " host "]
+myWorkspaces = [" <fn=2>\xf015</fn> ", " <fn=2>\xf1c9</fn> ", " <fn=2>\xf0ac</fn> ", " <fn=2>\xf4ad</fn> ", " <fn=2>\xf7d9</fn> ", " <fn=2>\xf233</fn> "]
 
 -- mySpacing i = spacingRaw True (Border i i i i) True (Border i i i i) True
 
@@ -77,11 +77,11 @@ main = do
         handleEventHook = handleEventHook def <+> docksEventHook,
         logHook = dynamicLogWithPP $ xmobarPP {
             ppOutput = hPutStrLn xmproc,
-            ppCurrent = xmobarColor "#56b6c2" "" . wrap "<box type=Bottom width=2 mb=2 color=#56b6c2>" "</box>",
+            ppCurrent = xmobarColor "#61afef" "" . wrap "<box type=Bottom width=2 mb=2 color=#61afef>" "</box>",
             ppHidden = xmobarColor "#c678dd" "" . wrap "<box type=Bottom width=2 mb=2 color=#c678dd>" "</box>",
             ppHiddenNoWindows = xmobarColor "#c678dd" "",
             ppUrgent = xmobarColor "#e06c75" "" . wrap "!" "!",
             ppTitle = xmobarColor "#dcdfe4" "",
-            ppSep = "<fc=#98c379> | </fc>"
+            ppSep = " <fc=#98c379>|</fc> "
         }
     } `additionalKeysP` myKeys
