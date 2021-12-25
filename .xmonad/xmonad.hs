@@ -1,12 +1,11 @@
 import System.IO
 
--- import XMonad hiding ((|||))
-import XMonad
+import XMonad hiding ((|||))
 import XMonad.Actions.CopyWindow (kill1)
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Layout.GridVariants (Grid(Grid))
--- import XMonad.Layout.LayoutCombinators
+import XMonad.Layout.LayoutCombinators
 import XMonad.Layout.LayoutModifier
 import XMonad.Layout.MultiToggle (mkToggle, single, EOT(EOT), (??))
 import XMonad.Layout.MultiToggle (Toggle(..))
@@ -31,10 +30,6 @@ myWorkspaces = [" main ", " dev ", " web ", " com ", " util ", " host "]
 
 -- mySpacing i = spacingRaw True (Border i i i i) True (Border i i i i) True
 
--- full =
-    -- renamed [Replace "full"]
-    -- Full
-
 tall =
     renamed [Replace "tall"] $
     -- mySpacing 8 $
@@ -53,15 +48,18 @@ grid =
     smartSpacingWithEdge 8 $
     Grid (16 / 10)
 
--- myLayoutHook = avoidStruts $ full ||| tall ||| wide ||| grid
-myLayoutHook = avoidStruts $ tall ||| wide ||| grid
+full =
+    renamed [Replace "full"]
+    Full
+
+myLayoutHook = avoidStruts $ tall ||| wide ||| grid ||| full 
 
 myKeys = [
     ("M-<Tab>", sendMessage NextLayout),
     ("M-c", kill1),
     ("M-<Return>", spawn myTerminal),
     ("M-b", spawn myBrowser),
-    -- ("M-<Space>", sendMessage $ JumpToLayout "full"),
+    ("M-<Space>", sendMessage $ JumpToLayout "full"),
     ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+ unmute"),
     ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%- unmute"),
     ("<XF86AudioMute>", spawn "amixer set Master toggle")

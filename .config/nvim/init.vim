@@ -57,11 +57,11 @@ call plug#end()
 
 let g:coc_global_extensions = ['coc-pairs', 'coc-tsserver', 'coc-prettier']
 autocmd bufwritepre * silent call CocAction('runCommand', 'editor.action.organizeImport')
+nnoremap <silent> <leader>h :call CocActionAsync('doHover')<cr>
 inoremap <expr> <c-space> coc#refresh()
 inoremap <expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<cr>"
 inoremap <expr> <tab> pumvisible() ? "<c-n>" : "<tab>"
 inoremap <expr> <s-tab> pumvisible() ? "<c-p>" : "<tab>"
-nnoremap <silent> <leader>h :call CocAction('doHover')<cr>
 
 let NERDTreeShowHidden=1
 let g:NERDTreeDirArrowExpandable = '+'
