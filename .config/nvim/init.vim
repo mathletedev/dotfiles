@@ -44,6 +44,7 @@ autocmd termopen * startinsert
 
 call plug#begin()
 
+Plug 'andweeb/presence.nvim'
 Plug 'neoclide/coc.nvim'
 Plug 'preservim/nerdtree'
 Plug 'rakr/vim-one'
@@ -55,6 +56,13 @@ Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
+let g:presence_neovim_image_text = "Neovim"
+let g:presence_log_level = "error"
+let g:presence_editing_text = "Editing [ %s ]"
+let g:presence_file_explorer_text = "Browsing files"
+let g:presence_reading_text = "Reading  [ %s ]"
+let g:presence_workspace_text = "Working on [ %s ]"
+
 let g:coc_global_extensions = ['coc-pairs', 'coc-tsserver', 'coc-prettier']
 autocmd bufwritepre * silent call CocAction('runCommand', 'editor.action.organizeImport')
 nnoremap <silent> <leader>h :call CocActionAsync('doHover')<cr>
@@ -63,7 +71,7 @@ inoremap <expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<cr>"
 inoremap <expr> <tab> pumvisible() ? "<c-n>" : "<tab>"
 inoremap <expr> <s-tab> pumvisible() ? "<c-p>" : "<tab>"
 
-let NERDTreeShowHidden=1
+let NERDTreeShowHidden = 1
 let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '~'
 nnoremap <leader>n :NERDTree<cr>
