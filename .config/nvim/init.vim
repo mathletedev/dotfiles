@@ -58,10 +58,10 @@ call plug#end()
 
 let g:presence_neovim_image_text = "Neovim"
 let g:presence_log_level = "error"
-let g:presence_editing_text = "Editing [ %s ]"
+let g:presence_editing_text = "Editing « %s »"
 let g:presence_file_explorer_text = "Browsing files"
-let g:presence_reading_text = "Reading  [ %s ]"
-let g:presence_workspace_text = "Working on [ %s ]"
+let g:presence_reading_text = "Reading  « %s »"
+let g:presence_workspace_text = "Working on « %s »"
 
 let g:coc_global_extensions = ['coc-pairs', 'coc-tsserver', 'coc-prettier']
 autocmd bufwritepre * silent call CocAction('runCommand', 'editor.action.organizeImport')

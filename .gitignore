@@ -8,6 +8,8 @@
 !.config/kitty
 !.config/kitty/current-theme.conf
 !.config/kitty/kitty.conf
+!.config/neofetch
+!.config/neofetch/config.conf
 !.config/nvim
 !.config/nvim/coc-settings.json
 !.config/nvim/init.vim
