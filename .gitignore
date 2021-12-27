@@ -1,5 +1,7 @@
 *
 !.bashrc
+!.bin
+!.bin/aow
 !.config
 !.config/fish
 !.config/fish/config.fish
