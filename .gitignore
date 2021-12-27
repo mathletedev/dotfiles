@@ -1,7 +1,5 @@
 *
 !.bashrc
-!.bin
-!.bin/aow
 !.config
 !.config/fish
 !.config/fish/config.fish
@@ -28,6 +26,8 @@
 !.xmonad/icons/fynn.xpm
 !.xmonad/xmonad.hs
 !.xprofile
+!bin
+!bin/aow
 !img
 !img/background.png
 !img/profile.png
