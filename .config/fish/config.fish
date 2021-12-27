@@ -5,6 +5,6 @@ set -g theme_color_scheme nord
 alias ls="exa -a --long --git"
 alias dfs="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 alias clean="clear; neofetch"
-alias say="fortune | pokemonsay"
+alias thoughts="fortune | pokemonthink"
 
 starship init fish | source
