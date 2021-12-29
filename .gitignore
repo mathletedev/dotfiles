@@ -5,6 +5,7 @@
 !.config/fish/config.fish
 !.config/fish/functions
 !.config/fish/functions/fish_greeting.fish
+!.config/fish/functions/fish_user_key_bindings.fish
 !.config/kitty
 !.config/kitty/current-theme.conf
 !.config/kitty/kitty.conf
