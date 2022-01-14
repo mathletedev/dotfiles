@@ -63,7 +63,7 @@ let g:presence_file_explorer_text = "Browsing files"
 let g:presence_reading_text = "Reading  « %s »"
 let g:presence_workspace_text = "Working on « %s »"
 
-let g:coc_global_extensions = ['coc-pairs', 'coc-tsserver', 'coc-prettier']
+let g:coc_global_extensions = ['coc-pairs', 'coc-tsserver', 'coc-java', 'coc-python', 'coc-prettier']
 autocmd bufwritepre * silent call CocAction('runCommand', 'editor.action.organizeImport')
 nnoremap <silent> <leader>h :call CocActionAsync('doHover')<cr>
 inoremap <expr> <c-space> coc#refresh()
