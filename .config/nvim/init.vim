@@ -63,7 +63,7 @@ let g:presence_file_explorer_text = "Browsing files"
 let g:presence_reading_text = "Reading  « %s »"
 let g:presence_workspace_text = "Working on « %s »"
 
-let g:coc_global_extensions = ['coc-pairs', 'coc-tsserver', 'coc-java', 'coc-python', 'coc-prettier']
+let g:coc_global_extensions = ["coc-tsserver", "coc-java", "coc-rust-analyzer", "coc-python", "coc-html", "coc-css", "coc-prettier", "coc-pairs"]
 autocmd bufwritepre * silent call CocAction('runCommand', 'editor.action.organizeImport')
 nnoremap <silent> <leader>h :call CocActionAsync('doHover')<cr>
 inoremap <expr> <c-space> coc#refresh()
@@ -72,8 +72,9 @@ inoremap <expr> <tab> pumvisible() ? "<c-n>" : "<tab>"
 inoremap <expr> <s-tab> pumvisible() ? "<c-p>" : "<tab>"
 
 let NERDTreeShowHidden = 1
-let g:NERDTreeDirArrowExpandable = '+'
-let g:NERDTreeDirArrowCollapsible = '~'
+let g:NERDTreeWinPos = "right"
+let g:NERDTreeDirArrowExpandable = "+"
+let g:NERDTreeDirArrowCollapsible = "~"
 nnoremap <leader>n :NERDTree<cr>
 
 colorscheme one
