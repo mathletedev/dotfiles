@@ -75,7 +75,8 @@ let NERDTreeShowHidden = 1
 let g:NERDTreeWinPos = "right"
 let g:NERDTreeDirArrowExpandable = "+"
 let g:NERDTreeDirArrowCollapsible = "~"
-nnoremap <leader>n :NERDTree<cr>
+nnoremap <silent> <leader>n :NERDTreeToggle<cr>
+nnoremap <silent> <leader>r :NERDTreeRefreshRoot<cr>
 
 colorscheme one
 set termguicolors
