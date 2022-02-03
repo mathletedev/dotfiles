@@ -1,3 +1,17 @@
+call plug#begin()
+
+Plug 'andweeb/presence.nvim'
+Plug 'neoclide/coc.nvim'
+Plug 'preservim/nerdtree'
+Plug 'rakr/vim-one'
+Plug 'tpope/vim-commentary'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+Plug 'ryanoasis/vim-devicons'
+
+call plug#end()
+
 set clipboard=unnamedplus
 set ignorecase
 set lazyredraw
@@ -22,17 +36,19 @@ nnoremap <leader>, <c-w><s-,>
 
 nnoremap <leader>y :%y<cr>
 
+autocmd filetype javascript nnoremap <leader>e :term node %<cr>
+autocmd filetype java nnoremap <leader>b :!javac ./%<cr>
+autocmd filetype java nnoremap <leader>e :term java %:r<cr>
+autocmd filetype rust nnoremap <leader>e :term cargo run<cr>
+autocmd filetype cpp nnoremap <leader>b :!g++ % -o %:r<cr>
+autocmd filetype cpp nnoremap <leader>e :term ./%:r<cr>
+autocmd filetype python nnoremap <leader>e :term python3 %<cr>
 autocmd filetype sh nnoremap <leader>e :term ./%<cr>
 autocmd filetype c nnoremap <leader>b :!gcc % -o %:r<cr>
 autocmd filetype c nnoremap <leader>e :term ./%:r<cr>
-autocmd filetype cpp nnoremap <leader>b :!g++ % -o %:r<cr>
-autocmd filetype cpp nnoremap <leader>e :term ./%:r<cr>
-autocmd filetype java nnoremap <leader>b :!javac ./%<cr>
-autocmd filetype java nnoremap <leader>e :term java %:r<cr>
-autocmd filetype javascript nnoremap <leader>e :term node %<cr>
-autocmd filetype python nnoremap <leader>e :term python3 %<cr>
 
 autocmd filetype haskell setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
+autocmd filetype rust setlocal tabstop=2
 
 autocmd insertenter * set norelativenumber
 autocmd insertleave * set relativenumber
@@ -41,20 +57,6 @@ noremap <expr> j (v:count == 0 ? "gj" : "j")
 noremap <expr> k (v:count == 0 ? "gk" : "k")
 
 autocmd termopen * startinsert
-
-call plug#begin()
-
-Plug 'andweeb/presence.nvim'
-Plug 'neoclide/coc.nvim'
-Plug 'preservim/nerdtree'
-Plug 'rakr/vim-one'
-Plug 'tpope/vim-commentary'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-Plug 'ryanoasis/vim-devicons'
-
-call plug#end()
 
 let g:presence_neovim_image_text = "Neovim"
 let g:presence_log_level = "error"
