@@ -47,8 +47,8 @@ autocmd filetype sh nnoremap <leader>e :term ./%<cr>
 autocmd filetype c nnoremap <leader>b :!gcc % -o %:r<cr>
 autocmd filetype c nnoremap <leader>e :term ./%:r<cr>
 
+autocmd filetype rust autocmd bufwinenter * set noexpandtab tabstop=2 shiftwidth=2
 autocmd filetype haskell setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
-autocmd filetype rust setlocal tabstop=2
 
 autocmd insertenter * set norelativenumber
 autocmd insertleave * set relativenumber
