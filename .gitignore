@@ -21,7 +21,6 @@
 !.config/xmobar/xmobarrc
 !.gitconfig
 !.gitignore
-!.tmux.conf
 !.xmonad
 !.xmonad/icons
 !.xmonad/icons/fynn.xpm
