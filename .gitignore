@@ -28,4 +28,6 @@
 !.xprofile
 !bin
 !bin/aow
+!bin/pokemonsay
+!bin/pokemonthink
 !README.md

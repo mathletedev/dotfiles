@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# This script changes to the pokemonsay installation directory,
+# runs the main script for running the pokemonthink, and changes
+# back to the previous directory.
+
+cd /home/delta/.pokemonsay/
+./pokemonthink.sh $@
+cd - >/dev/null
