@@ -1,17 +1,3 @@
-call plug#begin()
-
-Plug 'andweeb/presence.nvim'
-Plug 'neoclide/coc.nvim'
-Plug 'preservim/nerdtree'
-Plug 'rakr/vim-one'
-Plug 'tpope/vim-commentary'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-Plug 'ryanoasis/vim-devicons'
-
-call plug#end()
-
 set clipboard=unnamedplus
 set ignorecase
 set lazyredraw
@@ -57,6 +43,20 @@ noremap <expr> j (v:count == 0 ? "gj" : "j")
 noremap <expr> k (v:count == 0 ? "gk" : "k")
 
 autocmd termopen * startinsert
+
+call plug#begin()
+
+Plug 'andweeb/presence.nvim'
+Plug 'neoclide/coc.nvim'
+Plug 'preservim/nerdtree'
+Plug 'rakr/vim-one'
+Plug 'tpope/vim-commentary'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+Plug 'ryanoasis/vim-devicons'
+
+call plug#end()
 
 let g:presence_neovim_image_text = "Neovim"
 let g:presence_log_level = "error"
