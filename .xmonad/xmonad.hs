@@ -28,24 +28,21 @@ myBorderWidth = 0
 
 myWorkspaces = [" <fn=2>\xf015</fn> ", " <fn=2>\xf1c9</fn> ", " <fn=2>\xf0ac</fn> ", " <fn=2>\xf4ad</fn> ", " <fn=2>\xf7d9</fn> ", " <fn=2>\xf233</fn> "]
 
--- mySpacing i = spacingRaw True (Border i i i i) True (Border i i i i) True
+mySpacing i = spacingRaw True (Border i i i i) True (Border i i i i) True
 
 tall =
     renamed [Replace "tall"] $
-    -- mySpacing 8 $
-    smartSpacingWithEdge 8 $
+    mySpacing 8 $
     ResizableTall 1 (3 / 100) (1 / 2) []
 
 wide =
     renamed [Replace "wide"] $
-    -- mySpacing 8 $
-    smartSpacingWithEdge 8 $
+    mySpacing 8 $
     Mirror (Tall 1 (3 / 100) (1 / 2))
 
 grid =
     renamed [Replace "grid"] $
-    -- mySpacing 8 $
-    smartSpacingWithEdge 8 $
+    mySpacing 8 $
     Grid (16 / 10)
 
 full =
@@ -78,6 +75,8 @@ main = do
         logHook = dynamicLogWithPP $ xmobarPP {
             ppOutput = hPutStrLn xmproc,
             ppCurrent = xmobarColor "#61afef" "" . wrap "<box type=Bottom width=2 mb=2 color=#61afef>" "</box>",
+            -- ppHidden = xmobarColor "#dcdfe4" "" . wrap "<box type=Bottom width=2 mb=2 color=#dcdfe4>" "</box>",
+            -- ppHiddenNoWindows = xmobarColor "#dcdfe4" "",
             ppHidden = xmobarColor "#c678dd" "" . wrap "<box type=Bottom width=2 mb=2 color=#c678dd>" "</box>",
             ppHiddenNoWindows = xmobarColor "#c678dd" "",
             ppUrgent = xmobarColor "#e06c75" "" . wrap "!" "!",
