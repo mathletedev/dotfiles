@@ -20,7 +20,7 @@ import XMonad.Util.Run
 import Graphics.X11.ExtraTypes.XF86
 
 myTerminal = "kitty"
-myBrowser = "firefox"
+myBrowser = "firefox-developer-edition"
 
 myModMask = mod4Mask
 
