@@ -24,6 +24,7 @@
 !.xmonad
 !.xmonad/icons
 !.xmonad/icons/fynn.xpm
+!.xmonad/icons/sharingan.xpm
 !.xmonad/xmonad.hs
 !.xprofile
 !bin
