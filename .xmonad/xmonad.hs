@@ -49,7 +49,13 @@ full =
     renamed [Replace "full"]
     Full
 
-myLayoutHook = avoidStruts $ tall ||| wide ||| grid ||| full 
+myLayoutHook = avoidStruts $ tall ||| wide ||| grid ||| full
+
+myLayoutPrinter "tall" = "<fn=2>\xf338</fn>"
+myLayoutPrinter "wide" = "<fn=2>\xf337</fn>"
+myLayoutPrinter "grid" = "<fn=2>\xf424</fn>"
+myLayoutPrinter "full" = "<fn=2>\xf31e</fn>"
+myLayoutPrinter x = x
 
 myKeys = [
     ("M-<Tab>", sendMessage NextLayout),
@@ -74,11 +80,12 @@ main = do
         handleEventHook = handleEventHook def <+> docksEventHook,
         logHook = dynamicLogWithPP $ xmobarPP {
             ppOutput = hPutStrLn xmproc,
-            ppCurrent = xmobarColor "#61afef" "" . wrap "<box type=Bottom width=2 mb=2 color=#61afef>" "</box>",
-            ppHidden = xmobarColor "#c678dd" "" . wrap "<box type=Bottom width=2 mb=2 color=#c678dd>" "</box>",
+            ppCurrent = xmobarColor "#61afef" "" . wrap "<box type=Bottom width=2 mb=2>" "</box>",
+            ppHidden = xmobarColor "#c678dd" "" . wrap "<box type=Bottom width=2 mb=2>" "</box>",
             ppHiddenNoWindows = xmobarColor "#c678dd" "",
-            ppUrgent = xmobarColor "#e06c75" "" . wrap "!" "!",
+            ppUrgent = xmobarColor "#e06c75" "" . wrap "<box type=Bottom width=2 mb=2>" "</box>",
             ppTitle = xmobarColor "#dcdfe4" "",
-            ppSep = " <fc=#98c379>|</fc> "
+            ppLayout = xmobarColor "#56b6c2" "" . myLayoutPrinter,
+            ppSep = "  "
         }
     } `additionalKeysP` myKeys
