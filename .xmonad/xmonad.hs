@@ -26,7 +26,7 @@ myModMask = mod4Mask
 
 myBorderWidth = 0
 
-myWorkspaces = [" <fn=2>\xf015</fn> ", " <fn=2>\xf1c9</fn> ", " <fn=2>\xf0ac</fn> ", " <fn=2>\xf4ad</fn> ", " <fn=2>\xf7d9</fn> ", " <fn=2>\xf233</fn> "]
+myWorkspaces = [" <fn=1>\xf015</fn> ", " <fn=1>\xf1c9</fn> ", " <fn=1>\xf0ac</fn> ", " <fn=1>\xf4ad</fn> ", " <fn=1>\xf7d9</fn> ", " <fn=1>\xf233</fn> "]
 
 mySpacing i = spacingRaw True (Border i i i i) True (Border i i i i) True
 
@@ -51,10 +51,10 @@ full =
 
 myLayoutHook = avoidStruts $ tall ||| wide ||| grid ||| full
 
-myLayoutPrinter "tall" = "<fn=2>\xf338</fn>"
-myLayoutPrinter "wide" = "<fn=2>\xf337</fn>"
-myLayoutPrinter "grid" = "<fn=2>\xf424</fn>"
-myLayoutPrinter "full" = "<fn=2>\xf31e</fn>"
+myLayoutPrinter "tall" = "<fn=1>\xf338</fn>"
+myLayoutPrinter "wide" = "<fn=1>\xf337</fn>"
+myLayoutPrinter "grid" = "<fn=1>\xf424</fn>"
+myLayoutPrinter "full" = "<fn=1>\xf31e</fn>"
 myLayoutPrinter x = x
 
 myKeys = [
