@@ -74,9 +74,12 @@ inoremap <expr> <tab> pumvisible() ? "<c-n>" : "<tab>"
 inoremap <expr> <s-tab> pumvisible() ? "<c-p>" : "<tab>"
 
 let NERDTreeShowHidden = 1
+let NERDTreeIgnore = ['.git', 'node_modules']
 let g:NERDTreeWinPos = "right"
 let g:NERDTreeDirArrowExpandable = "+"
 let g:NERDTreeDirArrowCollapsible = "~"
+autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 | let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
 nnoremap <silent> <leader>n :NERDTreeToggle<cr>
 nnoremap <silent> <leader>r :NERDTreeRefreshRoot<cr>
 
