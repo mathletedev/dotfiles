@@ -38,7 +38,7 @@ tall =
 wide =
     renamed [Replace "wide"] $
     mySpacing 8 $
-    Mirror (Tall 1 (3 / 100) (1 / 2))
+    Mirror (ResizableTall 1 (3 / 100) (1 / 2) [])
 
 grid =
     renamed [Replace "grid"] $
@@ -60,6 +60,10 @@ myLayoutPrinter x = x
 myKeys = [
     ("M-<Tab>", sendMessage NextLayout),
     ("M-c", kill1),
+    ("M-<Up>", sendMessage MirrorExpand),
+    ("M-<Down>", sendMessage MirrorShrink),
+    ("M-<Left>", sendMessage Shrink),
+    ("M-<Right>", sendMessage Expand),
     ("M-<Return>", spawn myTerminal),
     ("M-b", spawn myBrowser),
     ("M-<Space>", sendMessage $ JumpToLayout "full"),
