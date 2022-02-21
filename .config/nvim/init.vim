@@ -74,7 +74,7 @@ inoremap <expr> <tab> pumvisible() ? "<c-n>" : "<tab>"
 inoremap <expr> <s-tab> pumvisible() ? "<c-p>" : "<tab>"
 
 let NERDTreeShowHidden = 1
-let NERDTreeIgnore = ['.git', 'node_modules']
+let NERDTreeIgnore = ['^.git$', '^node_modules$', '^yarn.lock$', '^.next$']
 let g:NERDTreeWinPos = "right"
 let g:NERDTreeDirArrowExpandable = "+"
 let g:NERDTreeDirArrowCollapsible = "~"
