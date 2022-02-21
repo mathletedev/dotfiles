@@ -1,0 +1,3 @@
+echo -n "> "
+read name
+eval "git add .; git commit -m \"$name\"; git push"
