@@ -1,6 +1,8 @@
 *
 !.bashrc
 !.config
+!.config/dmenu
+!.config/dmenu/config.h
 !.config/fish
 !.config/fish/config.fish
 !.config/fish/functions
