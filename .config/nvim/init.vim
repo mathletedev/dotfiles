@@ -16,7 +16,7 @@ nnoremap <leader>s <c-w>j
 nnoremap <leader>d <c-w>l
 nnoremap <silent> <leader>k :bn<cr>
 nnoremap <silent> <leader>j :bp<cr>
-nnoremap <silent> <leader>q :bd<cr>
+nnoremap <silent> <leader>q :bp<cr>:bd #<cr>
 nnoremap <leader>. <c-w><s-.>
 nnoremap <leader>, <c-w><s-,>
 
@@ -78,6 +78,7 @@ let NERDTreeIgnore = ['^.git$', '^node_modules$', '^yarn.lock$', '^.next$']
 let g:NERDTreeWinPos = "right"
 let g:NERDTreeDirArrowExpandable = "+"
 let g:NERDTreeDirArrowCollapsible = "~"
+autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 nnoremap <silent> <leader>n :NERDTreeToggle<cr>
 nnoremap <silent> <leader>r :NERDTreeRefreshRoot<cr>
 
