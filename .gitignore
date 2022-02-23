@@ -36,4 +36,5 @@
 !bin/pokemonsay
 !bin/pokemonthink
 !bin/push
+!bin/setup.sh
 !README.md
