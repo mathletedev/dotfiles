@@ -85,10 +85,10 @@ main = do
         handleEventHook = handleEventHook def <+> docksEventHook,
         logHook = dynamicLogWithPP $ xmobarPP {
             ppOutput = hPutStrLn xmproc,
-            ppCurrent = xmobarColor "#61afef" "" . wrap "<box type=Bottom width=2 mb=2>" "</box>",
-            ppHidden = xmobarColor "#c678dd" "" . wrap "<box type=Bottom width=2 mb=2>" "</box>",
-            ppHiddenNoWindows = xmobarColor "#c678dd" "",
-            ppUrgent = xmobarColor "#e06c75" "" . wrap "<box type=Bottom width=2 mb=2>" "</box>",
+            ppCurrent = xmobarColor "#e06c75" "" . wrap "<box type=Bottom width=2 mb=2>" "</box>",
+            ppHidden = xmobarColor "#61afef" "" . wrap "<box type=Bottom width=2 mb=2>" "</box>",
+            ppHiddenNoWindows = xmobarColor "#61afef" "",
+            ppUrgent = xmobarColor "#c678dd" "" . wrap "<box type=Bottom width=2 mb=2>" "</box>",
             ppTitle = xmobarColor "#dcdfe4" "",
             ppLayout = xmobarColor "#56b6c2" "" . myLayoutPrinter,
             ppSep = "  "
