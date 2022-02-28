@@ -1,19 +1,17 @@
 import System.IO
 
+import qualified Data.Map as M
+
 import XMonad hiding ((|||))
 import XMonad.Actions.CopyWindow (kill1)
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Layout.GridVariants (Grid(Grid))
 import XMonad.Layout.LayoutCombinators
-import XMonad.Layout.LayoutModifier
-import XMonad.Layout.MultiToggle (mkToggle, single, EOT(EOT), (??))
-import XMonad.Layout.MultiToggle (Toggle(..))
-import XMonad.Layout.MultiToggle.Instances (StdTransformers(NBFULL, NOBORDERS))
-import XMonad.Layout.NoBorders
 import XMonad.Layout.Renamed
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.Spacing
+import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.Run
 
@@ -51,6 +49,12 @@ full =
 
 myLayoutHook = avoidStruts $ tall ||| wide ||| grid ||| full
 
+toggleFloat w = windows (\s ->
+    if M.member w (W.floating s)
+        then W.sink w s
+        else (W.float w (W.RationalRect (1 / 3) (1 / 4) (1 / 2) (1 / 2)) s)
+    )
+
 myLayoutPrinter "tall" = "<fn=1>\xf338</fn>"
 myLayoutPrinter "wide" = "<fn=1>\xf337</fn>"
 myLayoutPrinter "grid" = "<fn=1>\xf424</fn>"
@@ -66,8 +70,9 @@ myKeys = [
     ("M-<Right>", sendMessage Expand),
     ("M-<Return>", spawn myTerminal),
     ("M-b", spawn myBrowser),
-    ("M-<Space>", sendMessage $ JumpToLayout "full"),
+    ("M-<Space>", sendMessage (JumpToLayout "full")),
     ("M-t", sendMessage ToggleStruts),
+    ("M-f", withFocused toggleFloat),
     ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+ unmute"),
     ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%- unmute"),
     ("<XF86AudioMute>", spawn "amixer set Master toggle")
