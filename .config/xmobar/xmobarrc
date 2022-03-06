@@ -29,5 +29,5 @@ Config {
 	],
 	sepChar = "%",
 	alignSep = "}{",
-	template = "  <action=`kitty -e hollywood`><icon=sharingan.xpm/></action>  %StdinReader% }{ <fc=#e06c75><action=`kitty -e htop`>%cpu%</action></fc>    <fc=#e5c07b><action=`kitty -e htop`>%memory%</action></fc>    <fc=#98c379><action=`kitty -e cava`>%alsa:default:Master%</action></fc>    <fc=#56b6c2>%KPUW%</fc>    <fc=#61afef><action=`kitty -e tty-clock -c`>%date%</action></fc>  "
+	template = "  <action=`kitty -e hollywood`><icon=sharingan.xpm/></action>  %StdinReader% }{ <fc=#e06c75><action=`kitty -e htop`>%cpu%</action></fc>    <fc=#e5c07b><action=`kitty -e htop`>%memory%</action></fc>    <fc=#98c379><action=`kitty -e cava`>%alsa:default:Master%</action></fc>    <fc=#56b6c2>%KPUW%</fc>    <fc=#61afef><action=`kitty -e tty-clock -c`>%date%</action></fc>    "
 }
