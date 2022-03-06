@@ -22,11 +22,13 @@ myBrowser = "firefox-developer-edition"
 
 myModMask = mod4Mask
 
-myBorderWidth = 0
+myBorderWidth = 4
+myFocusedBorderColor = "#373c45"
+myNormalBorderColor = "#373c45"
 
 myWorkspaces = [" <fn=1>\xf015</fn> ", " <fn=1>\xf1c9</fn> ", " <fn=1>\xf0ac</fn> ", " <fn=1>\xf4ad</fn> ", " <fn=1>\xf7d9</fn> ", " <fn=1>\xf233</fn> "]
 
-mySpacing i = spacingRaw True (Border i i i i) True (Border i i i i) True
+mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True
 
 tall =
     renamed [Replace "tall"] $
@@ -84,6 +86,8 @@ main = do
         terminal = myTerminal,
         modMask = myModMask,
         borderWidth = myBorderWidth,
+        focusedBorderColor = myFocusedBorderColor,
+        normalBorderColor = myNormalBorderColor,
         workspaces = myWorkspaces,
         manageHook = manageDocks <+> manageHook def,
         layoutHook = myLayoutHook,
