@@ -36,5 +36,6 @@
 !bin/pokemonsay
 !bin/pokemonthink
 !bin/push
-!bin/setup.sh
+!bin/setup
+!bin/wpilib_launcher
 !README.md
