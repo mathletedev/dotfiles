@@ -67,7 +67,6 @@ myKeys = [
     ("M-<Right>", sendMessage Expand),
     ("M-<Return>", spawn myTerminal),
     ("M-b", spawn myBrowser),
-    ("M-t", sendMessage ToggleStruts),
     ("M-<Space>", withFocused toggleFloat),
     ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+ unmute"),
     ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%- unmute"),
