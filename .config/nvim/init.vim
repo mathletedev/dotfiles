@@ -44,7 +44,7 @@ noremap <expr> k (v:count == 0 ? "gk" : "k")
 
 autocmd termopen * startinsert
 
-call plug#begin()
+call plug#begin('~/.config/nvim/plugged')
 
 Plug 'andweeb/presence.nvim'
 Plug 'neoclide/coc.nvim'
