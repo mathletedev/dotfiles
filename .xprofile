@@ -1,4 +1,6 @@
 picom &
 setxkbmap -option caps:escape &
+xinput set-prop "MSHW0092:00 045E:0933 Touchpad" "libinput Tapping Enabled" 1 &
+xinput set-prop "MSHW0092:00 045E:0933 Touchpad" "libinput Natural Scrolling Enabled" 1 &
 xsetroot -cursor_name left_ptr &
 nitrogen --restore &
