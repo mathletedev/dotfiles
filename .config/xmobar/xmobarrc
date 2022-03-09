@@ -2,6 +2,7 @@ Config {
 	font = "xft:Ubuntu:weight=bold:pixelsize=12:antialias=true:hinting=true",
 	additionalFonts = ["xft:Font Awesome 6 Free Solid:pixelsize=12"]
 	position = Static { xpos = 10 , ypos = 10, width = 1660, height = 24 },
+	-- position = Static { xpos = 10 , ypos = 10, width = 2236, height = 24 },
 	bgColor = "#282c34",
 	fgColor = "#dcdfe4",
 	lowerOnStart = True,
@@ -32,5 +33,5 @@ Config {
 	],
 	sepChar = "%",
 	alignSep = "}{",
-	template = "  <action=`kitty -e hollywood`><icon=sharingan.xpm/></action>  %StdinReader%}<fc=#61afef><action=`kitty -e tty-clock -c`>%time%</action></fc>{<fc=#e06c75><action=`kitty -e htop`>%cpu%  %memory%</action></fc>    <fc=#e5c07b>%battery%</fc>    <fc=#98c379><action=`kitty -e cava`>%alsa:default:Master%</action></fc>    <fc=#56b6c2>%KPUW%</fc>    <fc=#61afef><action=`kitty --hold -e cal -y`>%date%</action></fc>    <fc=#c678dd><action=`kitty -e sudo wifi-menu`>%dynnetwork%</action></fc>    "
+	template = "  <action=`kitty -e hollywood`><icon=sharingan.xpm/></action>  %StdinReader%}<fc=#61afef><action=`kitty -e tty-clock -c`>%time%</action></fc>{<fc=#e06c75><action=`kitty -e htop`>%cpu%  %memory%</action></fc>    <fc=#e5c07b>%battery%</fc>    <fc=#98c379><action=`kitty -e cava`>%alsa:default:Master%</action></fc>    <fc=#56b6c2>%KPUW%</fc>    <fc=#61afef><action=`kitty --hold -e cal -y`>%date%</action></fc>    <fc=#c678dd><action=`kitty -e nmtui`>%dynnetwork%</action></fc>    "
 }
