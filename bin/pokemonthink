@@ -4,6 +4,6 @@
 # runs the main script for running the pokemonthink, and changes
 # back to the previous directory.
 
-cd /home/delta/.pokemonsay/
+cd /home/neo/.pokemonsay/
 ./pokemonthink.sh $@
 cd - >/dev/null

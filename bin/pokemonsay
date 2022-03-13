@@ -4,6 +4,6 @@
 # runs the main script for running the pokemonsay, and changes
 # back to the previous directory.
 
-cd /home/delta/.pokemonsay/
+cd /home/neo/.pokemonsay/
 ./pokemonsay.sh $@
 cd - >/dev/null
