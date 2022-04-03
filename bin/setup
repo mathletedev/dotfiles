@@ -1,9 +1,9 @@
-kitty -e htop &
+kitty -e cava &
 sleep 0.5
-kitty -e cmatrix -C yellow &
+kitty -e cmatrix -C blue &
 sleep 0.5
 kitty -e tty-clock -c &
 sleep 0.5
-kitty -e cava &
+kitty -e bashtop &
 sleep 0.5
 kitty
