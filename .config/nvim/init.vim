@@ -20,6 +20,7 @@ nnoremap <silent> <leader>q :bp<cr>:bd #<cr>
 nnoremap <leader>. <c-w><s-.>
 nnoremap <leader>, <c-w><s-,>
 
+nnoremap <silent> <leader>/ :let @/ = ""<cr>
 nnoremap <leader>y :%y<cr>
 
 autocmd filetype javascript nnoremap <leader>e :term node %<cr>
