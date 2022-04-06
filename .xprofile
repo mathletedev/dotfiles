@@ -2,3 +2,4 @@ picom &
 setxkbmap -option caps:escape &
 xsetroot -cursor_name left_ptr &
 nitrogen --restore &
+dunst &

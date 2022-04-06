@@ -5,6 +5,8 @@
 !.config/cava/config
 !.config/dmenu
 !.config/dmenu/config.h
+!.config/dunst
+!.config/dunst/dunstrc
 !.config/fish
 !.config/fish/config.fish
 !.config/fish/functions
