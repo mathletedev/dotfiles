@@ -33,6 +33,8 @@ autocmd filetype python nnoremap <leader>e :term python3 %<cr>
 autocmd filetype sh nnoremap <leader>e :term ./%<cr>
 autocmd filetype c nnoremap <leader>b :!gcc % -o %:r<cr>
 autocmd filetype c nnoremap <leader>e :term ./%:r<cr>
+autocmd filetype arduino nnoremap <leader>b :!arduino-cli compile --fqbn arduino:avr:uno %:r<cr>
+autocmd filetype arduino nnoremap <leader>e :!arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:uno %:r<cr>
 
 autocmd filetype rust autocmd bufwinenter * set noexpandtab tabstop=2 shiftwidth=2
 autocmd filetype haskell setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
