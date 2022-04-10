@@ -1,3 +1,3 @@
 # dotfiles
 
-> Arch Fynn configuration files
+> My personal dotfiles!
