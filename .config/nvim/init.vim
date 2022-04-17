@@ -26,6 +26,8 @@ nnoremap <leader>y :%y<cr>
 autocmd filetype javascript nnoremap <leader>e :term node %<cr>
 autocmd filetype java nnoremap <leader>b :!javac ./%<cr>
 autocmd filetype java nnoremap <leader>e :term java %:r<cr>
+autocmd filetype go nnoremap <leader>b :!go build %<cr>
+autocmd filetype go nnoremap <leader>e :term go run %<cr>
 autocmd filetype rust nnoremap <leader>e :term cargo run<cr>
 autocmd filetype cpp nnoremap <leader>b :!g++ % -o %:r<cr>
 autocmd filetype cpp nnoremap <leader>e :term ./%:r<cr>
@@ -68,7 +70,7 @@ let g:presence_file_explorer_text = "Browsing files"
 let g:presence_reading_text = "Reading  « %s »"
 let g:presence_workspace_text = "Working on « %s »"
 
-let g:coc_global_extensions = ["coc-tsserver", "coc-java", "coc-rust-analyzer", "coc-python", "coc-html", "coc-css", "coc-prettier", "coc-pairs"]
+let g:coc_global_extensions = ["coc-tsserver", "coc-java", "coc-go", "coc-rust-analyzer", "coc-python", "coc-html", "coc-css", "coc-prettier", "coc-pairs"]
 autocmd bufwritepre * silent call CocAction('runCommand', 'editor.action.organizeImport')
 nnoremap <silent> <leader>h :call CocActionAsync('doHover')<cr>
 inoremap <expr> <c-space> coc#refresh()
