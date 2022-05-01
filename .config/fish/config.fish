@@ -1,4 +1,4 @@
-set PATH ~/bin/ $PATH
+set PATH ~/bin $PATH
 set -gx EDITOR nvim
 set -g theme_color_scheme nord
 
