@@ -7,6 +7,7 @@ set cursorline
 set tabstop=2
 set shiftwidth=2
 set hidden
+set splitbelow
 
 let mapleader = "\<space>"
 
@@ -23,18 +24,18 @@ nnoremap <leader>, <c-w><s-,>
 nnoremap <silent> <leader>/ :let @/ = ""<cr>
 nnoremap <leader>y :%y<cr>
 
-autocmd filetype javascript nnoremap <leader>e :term node %<cr>
-autocmd filetype java nnoremap <leader>b :!javac ./%<cr>
-autocmd filetype java nnoremap <leader>e :term java %:r<cr>
-autocmd filetype go nnoremap <leader>b :!go build %<cr>
-autocmd filetype go nnoremap <leader>e :term go run %<cr>
-autocmd filetype rust nnoremap <leader>e :term cargo run<cr>
+autocmd filetype javascript nnoremap <leader>e :sp<cr>:ter node %<cr>
 autocmd filetype cpp nnoremap <leader>b :!g++ % -o %:r<cr>
-autocmd filetype cpp nnoremap <leader>e :term ./%:r<cr>
+autocmd filetype cpp nnoremap <leader>e :sp<cr>:ter ./%:r<cr>
+autocmd filetype java nnoremap <leader>b :!javac ./%<cr>
+autocmd filetype java nnoremap <leader>e :sp<cr>:ter java %:r<cr>
 autocmd filetype python nnoremap <leader>e :term python3 %<cr>
-autocmd filetype sh nnoremap <leader>e :term ./%<cr>
+autocmd filetype sh nnoremap <leader>e :sp<cr>:ter ./%<cr>
+autocmd filetype go nnoremap <leader>b :!go build %<cr>
+autocmd filetype go nnoremap <leader>e :sp<cr>:ter go run %<cr>
+autocmd filetype rust nnoremap <leader>e :sp<cr>:ter cargo run<cr>
 autocmd filetype c nnoremap <leader>b :!gcc % -o %:r<cr>
-autocmd filetype c nnoremap <leader>e :term ./%:r<cr>
+autocmd filetype c nnoremap <leader>e :sp<cr>:ter ./%:r<cr>
 autocmd filetype arduino nnoremap <leader>b :!arduino-cli compile --fqbn arduino:avr:uno %:r<cr>
 autocmd filetype arduino nnoremap <leader>e :!arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:uno %:r<cr>
 
@@ -83,9 +84,9 @@ let NERDTreeIgnore = ['^.git$', '^node_modules$', '^yarn.lock$', '^.next$']
 let g:NERDTreeWinPos = "right"
 let g:NERDTreeDirArrowExpandable = "+"
 let g:NERDTreeDirArrowCollapsible = "~"
-autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+autocmd bufenter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 nnoremap <silent> <leader>n :NERDTreeToggle<cr>
-nnoremap <silent> <leader>r :NERDTreeRefreshRoot<cr>
+nnoremap <silent> <leader>r :NERDTreeRefreshRoot<cr>:NERDTreeRefreshRoot<cr>
 
 colorscheme one
 set termguicolors
