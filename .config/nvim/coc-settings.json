@@ -13,5 +13,9 @@
       ],
       "initializationOptions": { "cache": { "directory": "/tmp/ccls" } }
     }
-  }
+  },
+  "diagnostic.errorSign": "●",
+  "diagnostic.warningSign": "●",
+  "diagnostic.infoSign": "●",
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true
 }
