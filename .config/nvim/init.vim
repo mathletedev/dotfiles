@@ -1,12 +1,12 @@
 set clipboard=unnamedplus
-set ignorecase
-set lazyredraw
+set shiftwidth=2
+set tabstop=2
 set number
 set relativenumber
 set cursorline
-set tabstop=2
-set shiftwidth=2
 set hidden
+set ignorecase
+set lazyredraw
 set splitbelow
 
 let mapleader = "\<space>"
@@ -52,6 +52,7 @@ autocmd termopen * startinsert
 
 call plug#begin('~/.config/nvim/plugged')
 
+Plug 'airblade/vim-gitgutter'
 Plug 'andweeb/presence.nvim'
 Plug 'neoclide/coc.nvim'
 Plug 'preservim/nerdtree'
@@ -63,6 +64,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
+
+set updatetime=100
 
 let g:presence_neovim_image_text = "Neovim"
 let g:presence_log_level = "error"
