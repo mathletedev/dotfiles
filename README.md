@@ -1,3 +1,3 @@
 # dotfiles
 
-> My personal dotfiles!
+> MathleteDev's dotfiles!
