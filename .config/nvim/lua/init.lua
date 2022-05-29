@@ -81,11 +81,7 @@ for _, name in pairs(servers) do
   end
 end
 
-require "lualine".setup {
-  options = {
-    theme = "catppuccin"
-  }
-}
+require "lualine".setup { options = { theme = "catppuccin" } }
 
 require "nvim-treesitter.configs".setup {
   ensure_installed = { "python", "lua" },
