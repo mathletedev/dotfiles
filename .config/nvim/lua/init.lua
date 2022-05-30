@@ -33,6 +33,7 @@ vim.o.lazyredraw = true
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.shiftwidth = 2
+vim.o.splitbelow = true
 vim.o.tabstop = 2
 vim.o.termguicolors = true
 vim.o.updatetime = 100
@@ -52,16 +53,28 @@ vim.keymap.set("n", "<leader>y", ":%y<CR>")
 vim.keymap.set("n", "k", "v:count == 0 ? \"gk\" : \"k\"", { expr = true, silent = true })
 vim.keymap.set("n", "j", "v:count == 0 ? \"gj\" : \"j\"", { expr = true, silent = true })
 
-local lang_maps = { cpp = { build = "!g++ % -o %:r", exec = "sp<CR>:ter ./%:r" } }
+local lang_maps = {
+	cpp = { build = "g++ % -o %:r", exec = "./%:r" },
+	javascript = { exec = "node %" },
+	python = { exec = "python3 %" },
+	java = { build = "javac %", exec = "java %:r" },
+	sh = { exec = "./%" },
+	go = { build = "go build", exec = "go run %" },
+	rust = { exec = "cargo run" }
+}
 for lang, data in pairs(lang_maps) do
-	vim.api.nvim_create_autocmd("FileType", { command = "nnoremap <leader>b :" .. data.build .. "<cr>", pattern = lang })
-	vim.api.nvim_create_autocmd("FileType", { command = "nnoremap <leader>e :" .. data.exec .. "<cr>", pattern = lang })
+	if data.build ~= nil then vim.api.nvim_create_autocmd("FileType", { command = "nnoremap <leader>b :!" .. data.build .. "<cr>", pattern = lang }) end
+	vim.api.nvim_create_autocmd("FileType", { command = "nnoremap <leader>e :sp<CR>:ter " .. data.exec .. "<cr>", pattern = lang })
+end
+
+local formatters = { "ts", "cpp", "js", "py" }
+for _, formatter in ipairs(formatters) do
+	vim.api.nvim_create_autocmd("BufWritePre", { command = "lua vim.lsp.buf.formatting_sync(nil, 1000)", pattern = "*." .. formatter })
 end
 
 vim.api.nvim_create_autocmd("InsertEnter", { command = "set norelativenumber", pattern = "*" })
 vim.api.nvim_create_autocmd("InsertLeave", { command = "set relativenumber", pattern = "*" })
 vim.api.nvim_create_autocmd("TermOpen", { command = "startinsert", pattern = "*" })
-vim.api.nvim_create_autocmd("BufWritePre", { command = "lua vim.lsp.buf.formatting_sync(nil, 1000)", pattern = "*" })
 
 require "presence":setup {
 	neovim_image_text = "Neovim",
