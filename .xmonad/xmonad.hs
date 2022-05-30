@@ -25,8 +25,7 @@ myBrowser = "firefox-developer-edition"
 myModMask = mod4Mask
 
 myBorderWidth = 4
-myFocusedBorderColor = "#373c45"
-myNormalBorderColor = "#373c45"
+myBorderColor = "#363a4f"
 
 myWorkspaces = [" <fn=1>\xf015</fn> ", " <fn=1>\xf1c9</fn> ", " <fn=1>\xf0ac</fn> ", " <fn=1>\xf4ad</fn> ", " <fn=1>\xf7d9</fn> ", " <fn=1>\xf233</fn> "]
 
@@ -89,20 +88,20 @@ main = do
         terminal = myTerminal,
         modMask = myModMask,
         borderWidth = myBorderWidth,
-        focusedBorderColor = myFocusedBorderColor,
-        normalBorderColor = myNormalBorderColor,
+        focusedBorderColor = myBorderColor,
+        normalBorderColor = myBorderColor,
         workspaces = myWorkspaces,
         manageHook = manageDocks <+> manageHook def,
         layoutHook = myLayoutHook,
         handleEventHook = handleEventHook def <+> docksEventHook <+> fullscreenEventHook,
         logHook = dynamicLogWithPP $ xmobarPP {
             ppOutput = hPutStrLn xmproc,
-            ppCurrent = xmobarColor "#61afef" "" . wrap "<box type=Bottom width=2 mb=2>" "</box>",
-            ppHidden = xmobarColor "#c678dd" "" . wrap "<box type=Bottom width=2 mb=2>" "</box>",
-            ppHiddenNoWindows = xmobarColor "#c678dd" "",
-            ppUrgent = xmobarColor "#e06c75" "" . wrap "<box type=Bottom width=2 mb=2>" "</box>",
-            ppTitle = xmobarColor "#dcdfe4" "" . shorten 100,
-            ppLayout = xmobarColor "#56b6c2" "" . myLayoutPrinter,
+            ppCurrent = xmobarColor "#8aadf4" "" . wrap "<box type=Bottom width=2 mb=2>" "</box>",
+            ppHidden = xmobarColor "#494d64" "" . wrap "<box type=Bottom width=2 mb=2>" "</box>",
+            ppHiddenNoWindows = xmobarColor "#363a4f" "",
+            ppUrgent = xmobarColor "#ed8796" "" . wrap "<box type=Bottom width=2 mb=2>" "</box>",
+            ppTitle = xmobarColor "#cad3f5" "" . shorten 100,
+            ppLayout = xmobarColor "#c6a0f6" "" . myLayoutPrinter,
             ppSep = "  "
         }
     } `additionalKeysP` myKeys

@@ -97,8 +97,6 @@ vim.keymap.set("n", "<leader>r", ":NERDTreeRefreshRoot<CR>:NERDTreeRefreshRoot<C
 
 local cmp = require "cmp"
 cmp.setup {
-	mapping = cmp.mapping.preset.insert {
-		["<C-Space>"] = cmp.mapping.complete()
-	},
+	mapping = cmp.mapping.preset.insert { ["<C-Space>"] = cmp.mapping.complete() },
 	sources = { name = "nvim_lsp" }
 }
