@@ -123,7 +123,7 @@ require "lualine".setup {
 	},
 	sections = {
 		lualine_a = { { "mode", separator = { left = "" }, right_padding = 2 } },
-		lualine_b = { "filename", "branch" },
+		lualine_b = { "filename", "branch", { "diff", colored = false } },
 		lualine_c = {},
 		lualine_x = {},
 		lualine_y = { "filetype", "progress" },
@@ -137,14 +137,7 @@ require "lualine".setup {
 		lualine_y = {},
 		lualine_z = {}
 	},
-	tabline = {
-		lualine_a = { { "buffers", separator = { left = "", right = "" }, right_padding = 2, symbols = { alternate_file = "" } } },
-		lualine_b = {},
-		lualine_c = {},
-		lualine_x = {},
-		lualine_y = {},
-		lualine_z = {}
-	}
+	tabline = { lualine_a = { { "buffers", separator = { left = "", right = "" }, right_padding = 2, symbols = { alternate_file = "" } } } }
 }
 
 require "nvim-treesitter.configs".setup {
