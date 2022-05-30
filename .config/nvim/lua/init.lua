@@ -14,6 +14,7 @@ require "packer".startup(function(use)
 	use { "catppuccin/nvim", as = "catppuccin" }
 	use "hrsh7th/cmp-nvim-lsp"
 	use "hrsh7th/nvim-cmp"
+	use "L3MON4D3/LuaSnip"
 	use { "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } }
 	use "neovim/nvim-lspconfig"
 	use { "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons" } }
@@ -21,6 +22,7 @@ require "packer".startup(function(use)
 	use "onsails/lspkind-nvim"
 	use "preservim/nerdtree"
 	use "ryanoasis/vim-devicons"
+	use "saadparwaiz1/cmp_luasnip"
 	use "tpope/vim-commentary"
 	use "vim-scripts/auto-pairs-gentle"
 	use { "williamboman/nvim-lsp-installer", requires = "neovim/nvim-lspconfig" }
@@ -44,13 +46,21 @@ vim.keymap.set("n", "<Leader>s", "<C-w>j")
 vim.keymap.set("n", "<Leader>d", "<C-w>l")
 vim.keymap.set("n", "<Leader>j", ":bp<CR>", { silent = true })
 vim.keymap.set("n", "<Leader>k", ":bn<CR>", { silent = true })
-vim.keymap.set("n", "<Leader>q", ":bd<CR>", { silent = true })
+vim.keymap.set("n", "<Leader>q", ":bp<CR>:bd #<CR>", { silent = true })
 vim.keymap.set("n", "<Leader>/", ":let @/ = \"\"<CR>", { silent = true })
+vim.keymap.set("n", "<leader>y", ":%y<CR>")
 vim.keymap.set("n", "k", "v:count == 0 ? \"gk\" : \"k\"", { expr = true, silent = true })
 vim.keymap.set("n", "j", "v:count == 0 ? \"gj\" : \"j\"", { expr = true, silent = true })
 
+local lang_maps = { cpp = { build = "!g++ % -o %:r", exec = "sp<CR>:ter ./%:r" } }
+for lang, data in pairs(lang_maps) do
+	vim.api.nvim_create_autocmd("FileType", { command = "nnoremap <leader>b :" .. data.build .. "<cr>", pattern = lang })
+	vim.api.nvim_create_autocmd("FileType", { command = "nnoremap <leader>e :" .. data.exec .. "<cr>", pattern = lang })
+end
+
 vim.api.nvim_create_autocmd("InsertEnter", { command = "set norelativenumber", pattern = "*" })
 vim.api.nvim_create_autocmd("InsertLeave", { command = "set relativenumber", pattern = "*" })
+vim.api.nvim_create_autocmd("TermOpen", { command = "startinsert", pattern = "*" })
 
 require "presence":setup {
 	neovim_image_text = "Neovim",
@@ -79,7 +89,7 @@ require "gitsigns".setup {
 
 require "lspconfig"
 local lsp_installer = require "nvim-lsp-installer"
-local servers = { "tsserver", "pyright", "sumneko_lua" }
+local servers = { "tsserver", "clangd", "pyright", "sumneko_lua" }
 for _, name in pairs(servers) do
 	local found, server = lsp_installer.get_server(name)
 	if found and not server:is_installed() then
@@ -92,11 +102,7 @@ local on_attach = function(_, bufnr)
 	local opts = { buffer = bufnr }
 	vim.keymap.set("n", "<Leader>h", vim.lsp.buf.hover, opts)
 end
-local setup_server = {
-	sumneko_lua = function(opts)
-		opts.settings = { Lua = { diagnostics = { globals = { "vim" } } } }
-	end
-}
+local setup_server = { sumneko_lua = function(opts) opts.settings = { Lua = { diagnostics = { globals = { "vim" } } } } end }
 lsp_installer.on_server_ready(function(server)
 	local opts = { on_attach = on_attach, capabilities = capabilities }
 	if setup_server[server.name] then setup_server[server.name](opts) end
@@ -116,11 +122,7 @@ custom_catppuccin.inactive.b.bg = cp.base
 custom_catppuccin.inactive.b.fg = cp.surface0
 custom_catppuccin.inactive.c.bg = cp.base
 require "lualine".setup {
-	options = {
-		theme = custom_catppuccin,
-		component_separators = "|",
-		section_separators = { left = "", right = "" }
-	},
+	options = { theme = custom_catppuccin, component_separators = "|", section_separators = { left = "", right = "" } },
 	sections = {
 		lualine_a = { { "mode", separator = { left = "" }, right_padding = 2 } },
 		lualine_b = { "filename", "branch", { "diff", colored = false } },
@@ -129,19 +131,12 @@ require "lualine".setup {
 		lualine_y = { "filetype", "progress" },
 		lualine_z = { { "location", separator = { right = "" }, left_padding = 2 } }
 	},
-	inactive_sections = {
-		lualine_a = { "filename" },
-		lualine_b = {},
-		lualine_c = {},
-		lualine_x = {},
-		lualine_y = {},
-		lualine_z = {}
-	},
+	inactive_sections = { lualine_a = { "filename" }, lualine_b = {}, lualine_c = {}, lualine_x = {}, lualine_y = {}, lualine_z = {} },
 	tabline = { lualine_a = { { "buffers", separator = { left = "", right = "" }, right_padding = 2, symbols = { alternate_file = "" } } } }
 }
 
 require "nvim-treesitter.configs".setup {
-	ensure_installed = { "typescript", "python", "lua" },
+	ensure_installed = { "typescript", "cpp", "python", "lua" },
 	highlight = { enable = true }
 }
 
@@ -153,20 +148,16 @@ vim.keymap.set("n", "<Leader>n", ":NERDTreeToggle<CR>", { silent = true })
 vim.keymap.set("n", "<Leader>r", ":NERDTreeRefreshRoot<CR>:NERDTreeRefreshRoot<CR>", { silent = true })
 vim.api.nvim_create_autocmd("BufEnter", { command = "if winnr(\"$\") == 1 && exists(\"b:NERDTree\") && b:NERDTree.isTabTree() | quit | endif", pattern = "*" })
 
+local luasnip = require "luasnip"
+
 local cmp = require "cmp"
 cmp.setup {
+	snippet = { expand = function(args) luasnip.lsp_expand(args.body) end },
 	mapping = cmp.mapping.preset.insert {
 		["<C-Space>"] = cmp.mapping.complete(),
-		["<CR>"] = cmp.mapping.confirm {
-			behavior = cmp.ConfirmBehavior.Replace,
-			select = true
-		},
-		["<Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then cmp.select_next_item() else fallback() end
-		end, { "i", "s" }),
-		["<S-Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then cmp.select_prev_item() else fallback() end
-		end, { "i", "s" })
+		["<CR>"] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = true },
+		["<Tab>"] = cmp.mapping(function(fallback) if cmp.visible() then cmp.select_next_item() else fallback() end end, { "i", "s" }),
+		["<S-Tab>"] = cmp.mapping(function(fallback) if cmp.visible() then cmp.select_prev_item() else fallback() end end, { "i", "s" })
 	},
-	sources = { { name = "nvim_lsp" } }
+	sources = { { name = "nvim_lsp" }, { name = "luasnip" } }
 }
