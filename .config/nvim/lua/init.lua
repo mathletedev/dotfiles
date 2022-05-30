@@ -61,6 +61,7 @@ end
 vim.api.nvim_create_autocmd("InsertEnter", { command = "set norelativenumber", pattern = "*" })
 vim.api.nvim_create_autocmd("InsertLeave", { command = "set relativenumber", pattern = "*" })
 vim.api.nvim_create_autocmd("TermOpen", { command = "startinsert", pattern = "*" })
+vim.api.nvim_create_autocmd("BufWritePre", { command = "lua vim.lsp.buf.formatting_sync(nil, 1000)", pattern = "*" })
 
 require "presence":setup {
 	neovim_image_text = "Neovim",
