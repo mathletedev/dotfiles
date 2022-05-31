@@ -11,11 +11,12 @@
         ".git/",
         ".hg/"
       ],
-      "initializationOptions": {
-        "cache": {
-          "directory": "/tmp/ccls"
-        }
-      }
+      "initializationOptions": { "cache": { "directory": "/tmp/ccls" } }
     }
-  }
+  },
+  "diagnostic.errorSign": "●",
+  "diagnostic.warningSign": "●",
+  "diagnostic.infoSign": "●",
+  "diagnostic.hintSign": "●",
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true
 }
