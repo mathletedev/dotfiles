@@ -83,7 +83,7 @@ myKeys = [
     ]
 
 main = do
-    xmproc <- spawnPipe "xmobar"
+    xmproc <- spawnPipe "xmobar ~/.xmonad/xmobar.hs"
     xmonad $ ewmh $ def {
         terminal = myTerminal,
         modMask = myModMask,

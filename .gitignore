@@ -22,14 +22,13 @@
 !.config/picom
 !.config/picom/picom.conf
 !.config/starship.toml
-!.config/xmobar
-!.config/xmobar/xmobarrc
 !.gitconfig
 !.gitignore
 !.xmonad
 !.xmonad/icons
 !.xmonad/icons/fynn.xpm
 !.xmonad/icons/sharingan.xpm
+!.xmonad/xmobar.hs
 !.xmonad/xmonad.hs
 !.xprofile
 !bin

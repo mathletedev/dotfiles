@@ -30,5 +30,5 @@ Config {
 	],
 	sepChar = "%",
 	alignSep = "}{",
-	template = "  <action=`kitty -e hollywood`><icon=sharingan.xpm/></action>  %StdinReader%}<action=`kitty -e tty-clock -c`>%time%</action>{<action=`kitty -e htop`>%cpu%</action>    %memory%    <action=`kitty -e cava`>%alsa:default:Master%</action>    %KPUW%    <action=`kitty --hold -e cal -y`>%date%</action>    <action=`kitty -e nmtui`>%dynnetwork%</action>    "
+	template = "  <action='dmenu_run'><icon=sharingan.xpm/></action>  %StdinReader%}<action='kitty -e tty-clock -c'>%time%</action>{<action='kitty -e htop'>%cpu%</action>    %memory%    <action='kitty -e cava'>%alsa:default:Master%</action>    %KPUW%    <action='kitty --hold -e cal -y'>%date%</action>    <action='kitty -e nmtui'>%dynnetwork%</action>    "
 }
