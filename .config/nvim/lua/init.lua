@@ -25,7 +25,7 @@ require "packer".startup(function(use)
 	use "saadparwaiz1/cmp_luasnip"
 	use "tpope/vim-commentary"
 	use "vim-scripts/auto-pairs-gentle"
-	use { "williamboman/nvim-lsp-installer", requires = "neovim/nvim-lspconfig" }
+	use "williamboman/nvim-lsp-installer"
 end)
 
 vim.o.clipboard = "unnamedplus"
@@ -102,7 +102,6 @@ require "gitsigns".setup {
 	}
 }
 
--- require "lspconfig"
 local lsp_installer = require "nvim-lsp-installer"
 local servers = { "tsserver", "clangd", "pyright", "sumneko_lua" }
 for _, name in pairs(servers) do
