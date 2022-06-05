@@ -2,7 +2,7 @@
 static char * sharingan_xpm[] = {
 	"20 20 2 1",
 	" 	c None",
-	".	c #ed8796",
+	".	c #f38ba8",
 	"                    ",
 	"       .....        ",
 	"     .....          ",

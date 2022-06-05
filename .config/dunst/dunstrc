@@ -2,16 +2,16 @@
 	width = 400
 	offset = 16x50
 	font = CascadiaCode 10
-	background = "#24273a"
-	foreground = "#cad3f5"
+	background = "#1e1e2e"
+	foreground = "#cdd6f4"
 	frame_width = 4
-	frame_color = "#8aadf4"
+	frame_color = "#89b4fa"
 	corner_radius = 10
 	icon_path = /usr/share/icons/breeze-dark/status/64
 	browser = /usr/bin/firefox-developer-edition
 
 [urgency_low]
-	frame_color = "#a6da95"
+	frame_color = "#a6e3a1"
 
 [urgency_critical]
-	frame_color = "#ed8796"
+	frame_color = "#f38ba8"

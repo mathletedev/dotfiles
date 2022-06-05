@@ -86,7 +86,7 @@ require "presence":setup {
 	presence_workspace_text = "Working on « %s »"
 }
 
-vim.g.catppuccin_flavour = "macchiato"
+vim.g.catppuccin_flavour = "mocha"
 vim.cmd [[colorscheme catppuccin]]
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -116,7 +116,7 @@ local on_attach = function(_, bufnr)
 	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 	local opts = { buffer = bufnr }
 	vim.keymap.set("n", "<Leader>h", vim.lsp.buf.hover, opts)
-	vim.keymap.set("n", "<Leader>d", vim.lsp.buf.declaration, opts)
+	vim.keymap.set("n", "<Leader>i", vim.lsp.buf.definition, opts)
 	vim.keymap.set("n", "<Leader>r", vim.lsp.buf.rename, opts)
 	vim.keymap.set("n", "<Leader>f", vim.lsp.buf.formatting, opts)
 end
