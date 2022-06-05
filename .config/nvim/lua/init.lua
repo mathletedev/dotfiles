@@ -69,7 +69,7 @@ for lang, data in pairs(lang_maps) do
 end
 
 local formatters = { "ts", "cpp", "js", "py" }
-for _, formatter in ipairs(formatters) do
+for _, formatter in pairs(formatters) do
 	vim.api.nvim_create_autocmd("BufWritePre", { command = "lua vim.lsp.buf.formatting_sync(nil, 1000)", pattern = "*." .. formatter })
 end
 
