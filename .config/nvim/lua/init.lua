@@ -90,7 +90,7 @@ vim.g.catppuccin_flavour = "macchiato"
 vim.cmd [[colorscheme catppuccin]]
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
 require "gitsigns".setup {
 	signs = {
@@ -102,7 +102,7 @@ require "gitsigns".setup {
 	}
 }
 
-require "lspconfig"
+-- require "lspconfig"
 local lsp_installer = require "nvim-lsp-installer"
 local servers = { "tsserver", "clangd", "pyright", "sumneko_lua" }
 for _, name in pairs(servers) do
@@ -116,6 +116,9 @@ local on_attach = function(_, bufnr)
 	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 	local opts = { buffer = bufnr }
 	vim.keymap.set("n", "<Leader>h", vim.lsp.buf.hover, opts)
+	vim.keymap.set("n", "<Leader>d", vim.lsp.buf.declaration, opts)
+	vim.keymap.set("n", "<Leader>r", vim.lsp.buf.rename, opts)
+	vim.keymap.set("n", "<Leader>f", vim.lsp.buf.formatting, opts)
 end
 local setup_server = { sumneko_lua = function(opts) opts.settings = { Lua = { diagnostics = { globals = { "vim" } } } } end }
 lsp_installer.on_server_ready(function(server)
