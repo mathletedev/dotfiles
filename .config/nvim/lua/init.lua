@@ -89,8 +89,20 @@ require "presence":setup {
 vim.g.catppuccin_flavour = "mocha"
 vim.cmd [[colorscheme catppuccin]]
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+local luasnip = require "luasnip"
+local cmp = require "cmp"
+cmp.setup {
+	snippet = { expand = function(args) luasnip.lsp_expand(args.body) end },
+	mapping = cmp.mapping.preset.insert {
+		["<C-Space>"] = cmp.mapping.complete(),
+		["<CR>"] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = true },
+		["<Tab>"] = cmp.mapping(function(fallback) if cmp.visible() then cmp.select_next_item() else fallback() end end, { "i", "s" }),
+		["<S-Tab>"] = cmp.mapping(function(fallback) if cmp.visible() then cmp.select_prev_item() else fallback() end end, { "i", "s" })
+	},
+	sources = { { name = "nvim_lsp" }, { name = "luasnip" } }
+}
+
+local capabilities = require "cmp_nvim_lsp".update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 require "gitsigns".setup {
 	signs = {
@@ -165,16 +177,4 @@ vim.keymap.set("n", "<Leader>n", ":NERDTreeToggle<CR>", { silent = true })
 vim.keymap.set("n", "<Leader>r", ":NERDTreeRefreshRoot<CR>:NERDTreeRefreshRoot<CR>", { silent = true })
 vim.api.nvim_create_autocmd("BufEnter", { command = "if winnr(\"$\") == 1 && exists(\"b:NERDTree\") && b:NERDTree.isTabTree() | quit | endif", pattern = "*" })
 
-local luasnip = require "luasnip"
-
-local cmp = require "cmp"
-cmp.setup {
-	snippet = { expand = function(args) luasnip.lsp_expand(args.body) end },
-	mapping = cmp.mapping.preset.insert {
-		["<C-Space>"] = cmp.mapping.complete(),
-		["<CR>"] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = true },
-		["<Tab>"] = cmp.mapping(function(fallback) if cmp.visible() then cmp.select_next_item() else fallback() end end, { "i", "s" }),
-		["<S-Tab>"] = cmp.mapping(function(fallback) if cmp.visible() then cmp.select_prev_item() else fallback() end end, { "i", "s" })
-	},
-	sources = { { name = "nvim_lsp" }, { name = "luasnip" } }
-}
+vim.keymap.set({ "n", "v" }, "<Leader>c", ":Commentary<CR>")
