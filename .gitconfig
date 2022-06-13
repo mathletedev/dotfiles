@@ -4,3 +4,6 @@ email = mathletedev@gmail.com
 
 [credential]
 helper = store
+
+[init]
+defaultBranch = main
