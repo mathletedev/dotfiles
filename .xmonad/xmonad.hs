@@ -5,6 +5,7 @@ import qualified Data.Map as M
 import XMonad hiding ((|||))
 import XMonad.Actions.CopyWindow
 import XMonad.Actions.NoBorders
+import XMonad.Actions.SpawnOn
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
@@ -82,6 +83,12 @@ myKeys = [
 	("<XF86AudioMute>", spawn "amixer set Master toggle")
 	]
 
+myStartupHook = do
+	spawnOn (myWorkspaces !! 0) "notion-app"
+	spawnOn (myWorkspaces !! 1) "kitty -e nvim"
+	spawnOn (myWorkspaces !! 1) "kitty"
+	spawnOn (myWorkspaces !! 2) "firefox-developer-edition"
+
 main = do
 	xmproc <- spawnPipe "xmobar ~/.xmonad/xmobar.hs"
 	xmonad $ ewmh $ def {
@@ -91,9 +98,10 @@ main = do
 		focusedBorderColor = myBorderColor,
 		normalBorderColor = myBorderColor,
 		workspaces = myWorkspaces,
-		manageHook = manageDocks <+> manageHook def,
+		manageHook = manageHook def <+> manageDocks <+> manageSpawn,
 		layoutHook = myLayoutHook,
 		handleEventHook = handleEventHook def <+> docksEventHook <+> fullscreenEventHook,
+		startupHook = myStartupHook,
 		logHook = dynamicLogWithPP $ xmobarPP {
 			ppOutput = hPutStrLn xmproc,
 			ppCurrent = xmobarColor "#89b4fa" "" . wrap "<box type=Bottom width=2 mb=2>" "</box>",
