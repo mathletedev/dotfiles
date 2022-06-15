@@ -21,9 +21,9 @@ require "packer".startup(function(use)
 	use "neovim/nvim-lspconfig"
 	use "nvim-lua/plenary.nvim"
 	use { "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons" } }
+	use "nvim-telescope/telescope.nvim"
 	use "nvim-treesitter/nvim-treesitter"
 	use "onsails/lspkind-nvim"
-	use "preservim/nerdtree"
 	use "ryanoasis/vim-devicons"
 	use "saadparwaiz1/cmp_luasnip"
 	use "tpope/vim-commentary"
@@ -173,17 +173,18 @@ require "lualine".setup {
 	tabline = { lualine_a = { { "buffers", separator = { left = "", right = "" }, right_padding = 2, symbols = { alternate_file = "" } } } }
 }
 
+require "telescope".setup {
+	defaults = {
+		mappings = { n = { ["o"] = require "telescope.actions".select_default } },
+		initial_mode = "normal",
+		file_ignore_patterns = { "node_modules" }
+	}
+}
+vim.keymap.set("n", "<Leader>n", require "telescope.builtin".find_files)
+
 require "nvim-treesitter.configs".setup {
 	ensure_installed = { "typescript", "cpp", "python", "lua" },
 	highlight = { enable = true }
 }
-
-vim.g.NERDTreeShowHidden = 1
-vim.g.NERDTreeWinPos = "right"
-vim.g.NERDTreeDirArrowExpandable = ""
-vim.g.NERDTreeDirArrowCollapsible = ""
-vim.keymap.set("n", "<Leader>n", ":NERDTreeToggle<CR>", { silent = true })
-vim.keymap.set("n", "<Leader>r", ":NERDTreeRefreshRoot<CR>:NERDTreeRefreshRoot<CR>", { silent = true })
-vim.api.nvim_create_autocmd("BufEnter", { command = "if winnr(\"$\") == 1 && exists(\"b:NERDTree\") && b:NERDTree.isTabTree() | quit | endif", pattern = "*" })
 
 vim.keymap.set({ "n", "v" }, "<Leader>c", ":Commentary<CR>", { silent = true })
