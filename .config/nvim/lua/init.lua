@@ -14,9 +14,12 @@ require "packer".startup(function(use)
 	use { "catppuccin/nvim", as = "catppuccin" }
 	use "hrsh7th/cmp-nvim-lsp"
 	use "hrsh7th/nvim-cmp"
+	use "jose-elias-alvarez/null-ls.nvim"
 	use "L3MON4D3/LuaSnip"
-	use { "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } }
+	use "lewis6991/gitsigns.nvim"
+	use "MunifTanjim/prettier.nvim"
 	use "neovim/nvim-lspconfig"
+	use "nvim-lua/plenary.nvim"
 	use { "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons" } }
 	use "nvim-treesitter/nvim-treesitter"
 	use "onsails/lspkind-nvim"
@@ -67,12 +70,7 @@ for lang, data in pairs(lang_maps) do
 	if data.build ~= nil then vim.api.nvim_create_autocmd("FileType", { command = "nnoremap <leader>b :!" .. data.build .. "<cr>", pattern = lang }) end
 	vim.api.nvim_create_autocmd("FileType", { command = "nnoremap <leader>e :sp<CR>:ter " .. data.exec .. "<cr>", pattern = lang })
 end
-
-local formatters = { "ts", "cpp", "js", "py" }
-for _, formatter in pairs(formatters) do
-	vim.api.nvim_create_autocmd("BufWritePre", { command = "lua vim.lsp.buf.formatting_sync(nil, 1000)", pattern = "*." .. formatter })
-end
-
+vim.api.nvim_create_autocmd("BufWritePre", { command = "lua vim.lsp.buf.formatting_sync(nil, 1000)", pattern = "ts,tsx,cpp,py" })
 vim.api.nvim_create_autocmd("InsertEnter", { command = "set norelativenumber", pattern = "*" })
 vim.api.nvim_create_autocmd("InsertLeave", { command = "set relativenumber", pattern = "*" })
 vim.api.nvim_create_autocmd("TermOpen", { command = "startinsert", pattern = "*" })
@@ -104,6 +102,15 @@ cmp.setup {
 
 local capabilities = require "cmp_nvim_lsp".update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
+require "null-ls".setup {
+	on_attach = function(client)
+		if client.resolved_capabilities.document_formatting then
+			vim.keymap.set("n", "<Leader>f", vim.lsp.buf.formatting)
+			vim.api.nvim_create_autocmd("BufWritePre", { command = "lua vim.lsp.buf.formatting_sync(nil, 1000)" })
+		end
+	end
+}
+
 require "gitsigns".setup {
 	signs = {
 		add = { text = "+" },
@@ -114,25 +121,27 @@ require "gitsigns".setup {
 	}
 }
 
-local lsp_installer = require "nvim-lsp-installer"
+require "prettier".setup { bin = "prettier" }
+
 local servers = { "tsserver", "clangd", "pyright", "sumneko_lua" }
 for _, name in pairs(servers) do
-	local found, server = lsp_installer.get_server(name)
+	local found, server = require "nvim-lsp-installer".get_server(name)
 	if found and not server:is_installed() then
 		print("Installing " .. name)
 		server:install()
 	end
 end
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
 	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 	local opts = { buffer = bufnr }
 	vim.keymap.set("n", "<Leader>h", vim.lsp.buf.hover, opts)
 	vim.keymap.set("n", "<Leader>i", vim.lsp.buf.definition, opts)
 	vim.keymap.set("n", "<Leader>r", vim.lsp.buf.rename, opts)
 	vim.keymap.set("n", "<Leader>f", vim.lsp.buf.formatting, opts)
+	if client.name == "tsserver" then client.resolved_capabilities.document_formatting = false end
 end
 local setup_server = { sumneko_lua = function(opts) opts.settings = { Lua = { diagnostics = { globals = { "vim" } } } } end }
-lsp_installer.on_server_ready(function(server)
+require "nvim-lsp-installer".on_server_ready(function(server)
 	local opts = { on_attach = on_attach, capabilities = capabilities }
 	if setup_server[server.name] then setup_server[server.name](opts) end
 	server:setup(opts)
@@ -177,4 +186,4 @@ vim.keymap.set("n", "<Leader>n", ":NERDTreeToggle<CR>", { silent = true })
 vim.keymap.set("n", "<Leader>r", ":NERDTreeRefreshRoot<CR>:NERDTreeRefreshRoot<CR>", { silent = true })
 vim.api.nvim_create_autocmd("BufEnter", { command = "if winnr(\"$\") == 1 && exists(\"b:NERDTree\") && b:NERDTree.isTabTree() | quit | endif", pattern = "*" })
 
-vim.keymap.set({ "n", "v" }, "<Leader>c", ":Commentary<CR>")
+vim.keymap.set({ "n", "v" }, "<Leader>c", ":Commentary<CR>", { silent = true })
