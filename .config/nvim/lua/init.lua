@@ -14,10 +14,8 @@ require "packer".startup(function(use)
 	use { "catppuccin/nvim", as = "catppuccin" }
 	use "hrsh7th/cmp-nvim-lsp"
 	use "hrsh7th/nvim-cmp"
-	use "jose-elias-alvarez/null-ls.nvim"
 	use "L3MON4D3/LuaSnip"
 	use "lewis6991/gitsigns.nvim"
-	use "MunifTanjim/prettier.nvim"
 	use "neovim/nvim-lspconfig"
 	use "nvim-lua/plenary.nvim"
 	use { "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons" } }
@@ -102,15 +100,6 @@ cmp.setup {
 
 local capabilities = require "cmp_nvim_lsp".update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-require "null-ls".setup {
-	on_attach = function(client)
-		if client.resolved_capabilities.document_formatting then
-			vim.keymap.set("n", "<Leader>f", vim.lsp.buf.formatting)
-			vim.api.nvim_create_autocmd("BufWritePre", { command = "lua vim.lsp.buf.formatting_sync(nil, 1000)" })
-		end
-	end
-}
-
 require "gitsigns".setup {
 	signs = {
 		add = { text = "+" },
@@ -121,9 +110,7 @@ require "gitsigns".setup {
 	}
 }
 
-require "prettier".setup { bin = "prettier" }
-
-local servers = { "tsserver", "clangd", "pyright", "sumneko_lua" }
+local servers = { "tsserver", "eslint", "clangd", "pyright", "sumneko_lua" }
 for _, name in pairs(servers) do
 	local found, server = require "nvim-lsp-installer".get_server(name)
 	if found and not server:is_installed() then
@@ -131,14 +118,13 @@ for _, name in pairs(servers) do
 		server:install()
 	end
 end
-local on_attach = function(client, bufnr)
+local on_attach = function(_, bufnr)
 	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 	local opts = { buffer = bufnr }
 	vim.keymap.set("n", "<Leader>h", vim.lsp.buf.hover, opts)
 	vim.keymap.set("n", "<Leader>i", vim.lsp.buf.definition, opts)
 	vim.keymap.set("n", "<Leader>r", vim.lsp.buf.rename, opts)
 	vim.keymap.set("n", "<Leader>f", vim.lsp.buf.formatting, opts)
-	if client.name == "tsserver" then client.resolved_capabilities.document_formatting = false end
 end
 local setup_server = { sumneko_lua = function(opts) opts.settings = { Lua = { diagnostics = { globals = { "vim" } } } } end }
 require "nvim-lsp-installer".on_server_ready(function(server)
@@ -177,8 +163,10 @@ require "telescope".setup {
 	defaults = {
 		mappings = { n = { ["o"] = require "telescope.actions".select_default } },
 		initial_mode = "normal",
-		file_ignore_patterns = { "node_modules" }
-	}
+		hidden = true,
+		file_ignore_patterns = { ".git", "node_modules" }
+	},
+	pickers = { find_files = { hidden = true } }
 }
 vim.keymap.set("n", "<Leader>n", require "telescope.builtin".find_files)
 
