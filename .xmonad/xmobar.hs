@@ -10,8 +10,9 @@ Config {
 		Run StdinReader,
 		Run Date "<fc=#89b4fa><fn=1>\xf017</fn>  %H:%M:%S</fc>" "time" 10,
 		Run Cpu ["-t", "<fc=#f38ba8><fn=1>\xf2db</fn>  <total>%</fc>"] 20,
-		Run Memory ["-t", "<fc=#fab387><fn=1>\xf538</fn>  <usedratio>%</fc>"] 20,
-		Run Alsa "default" "Master" ["-t", "<fc=#f9e2af><fn=1><status></fn>  <volume>%</fc>", "--", "-O", "\xf028", "-o", "\xf6a9", "-C", "#f9e2af", "-c", "#f9e2af"],
+		Run Memory ["-t", "<fc=#f38ba8><fn=1>\xf538</fn>  <usedratio>%</fc>"] 20,
+		Run Alsa "default" "Master" ["-t", "<fc=#fab387><fn=1><status></fn>  <volume>%</fc>", "--", "-O", "\xf028", "-o", "\xf6a9", "-C", "#fab387", "-c", "#fab387"],
+		Run Battery ["-t", "<fc=#eed49f><fn=1>\xe0b7</fn>  <left>%</fc>"] 600,
 		Run WeatherX "KPUW" [
 			("clear", "\xf185"),
 			("sunny", "\xf185"),
@@ -31,5 +32,5 @@ Config {
 	],
 	sepChar = "%",
 	alignSep = "}{",
-	template = "  <action='dmenu_run'><icon=sharingan.xpm/></action>  %StdinReader%}<action='kitty -e tty-clock -c'>%time%</action>{<action='kitty -e htop'>%cpu%</action>    %memory%    <action='kitty -e cava'>%alsa:default:Master%</action>    %KPUW%    <action='kitty --hold -e cal -y'>%date%</action>    <action='kitty -e nmtui'>%dynnetwork%</action>    "
+	template = "  <action='dmenu_run'><icon=sharingan.xpm/></action>  %StdinReader%}<action='kitty -e tty-clock -c'>%time%</action>{<action='kitty -e htop'>%cpu%</action>    %memory%    <action='kitty -e cava'>%alsa:default:Master%</action>    %battery%    %KPUW%    <action='kitty --hold -e cal -y'>%date%</action>    <action='kitty -e nmtui'>%dynnetwork%</action>    "
 }
