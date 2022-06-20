@@ -32,6 +32,7 @@
 !.xmonad/xmobar.hs
 !.xmonad/xmonad.hs
 !.xprofile
+!README.md
 !bin
 !bin/aow
 !bin/pokemonsay
@@ -39,4 +40,4 @@
 !bin/push
 !bin/setup
 !bin/wpilib_launcher
-!README.md
+!packages.txt
