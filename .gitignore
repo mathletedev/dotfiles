@@ -19,6 +19,7 @@
 !.config/nvim
 !.config/nvim/init.vim
 !.config/nvim/lua/init.lua
+!.config/nvim/lua/stylua.toml
 !.config/picom
 !.config/picom/picom.conf
 !.config/starship.toml
