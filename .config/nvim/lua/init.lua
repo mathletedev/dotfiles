@@ -67,7 +67,7 @@ vim.keymap.set("n", "j", "v:count == 0 ? \"gj\" : \"j\"", { expr = true, silent 
 local lang_maps = {
 	cpp = { build = "g++ % -o %:r", exec = "./%:r" },
 	javascript = { exec = "node %" },
-	python = { exec = "python3 %" },
+	python = { exec = "python %" },
 	java = { build = "javac %", exec = "java %:r" },
 	sh = { exec = "./%" },
 	go = { build = "go build", exec = "go run %" },
@@ -87,7 +87,7 @@ for lang, data in pairs(lang_maps) do
 end
 vim.api.nvim_create_autocmd("BufWritePre", {
 	command = "lua vim.lsp.buf.formatting_sync(nil, 1000)",
-	pattern = "*.cpp,*.css,*.js,*.json,*.jsx,*.lua,*.md,*.py,*.ts,*.tsx,*.yaml",
+	pattern = "*.cpp,*.css,*.html,*.js,*.json,*.jsx,*.lua,*.md,*.py,*.ts,*.tsx,*.yaml",
 })
 vim.api.nvim_create_autocmd("InsertEnter", { command = "set norelativenumber", pattern = "*" })
 vim.api.nvim_create_autocmd("InsertLeave", { command = "set relativenumber", pattern = "*" })
@@ -139,7 +139,7 @@ cmp.setup {
 	sources = { { name = "nvim_lsp" }, { name = "luasnip" } },
 }
 
-local servers = { "tsserver", "clangd", "pyright", "sumneko_lua" }
+local servers = { "bashls", "clangd", "cssls", "pyright", "sumneko_lua", "tsserver" }
 local has_formatter = { "tsserver", "sumneko_lua" }
 for _, name in pairs(servers) do
 	local found, server = require("nvim-lsp-installer").get_server(name)
@@ -251,14 +251,14 @@ require("telescope").setup {
 		mappings = { n = { ["o"] = require("telescope.actions").select_default } },
 		initial_mode = "normal",
 		hidden = true,
-		file_ignore_patterns = { ".git", "node_modules" },
+		file_ignore_patterns = { ".git/", "node_modules/" },
 	},
 	pickers = { find_files = { hidden = true } },
 }
 vim.keymap.set("n", "<Leader>n", require("telescope.builtin").find_files)
 
 require("nvim-treesitter.configs").setup {
-	ensure_installed = { "typescript", "cpp", "python", "lua" },
+	ensure_installed = { "bash", "cpp", "css", "html", "lua", "python", "tsx", "typescript", "yaml" },
 	highlight = { enable = true },
 }
 
