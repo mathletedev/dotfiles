@@ -15,6 +15,7 @@ require("packer").startup(function(use)
 
 	use "andweeb/presence.nvim"
 	use { "catppuccin/nvim", as = "catppuccin" }
+	use "glepnir/dashboard-nvim"
 	use "hrsh7th/cmp-nvim-lsp"
 	use "hrsh7th/nvim-cmp"
 	use "jose-elias-alvarez/null-ls.nvim"
@@ -25,6 +26,7 @@ require("packer").startup(function(use)
 	use "nvim-lua/plenary.nvim"
 	use "nvim-lualine/lualine.nvim"
 	use "nvim-telescope/telescope.nvim"
+	use "nvim-telescope/telescope-file-browser.nvim"
 	use "nvim-treesitter/nvim-treesitter"
 	use "onsails/lspkind-nvim"
 	use "ryanoasis/vim-devicons"
@@ -41,6 +43,7 @@ vim.o.number = true
 vim.o.relativenumber = true
 vim.o.shiftwidth = 2
 vim.o.splitbelow = true
+vim.o.splitright = true
 vim.o.tabstop = 2
 vim.o.termguicolors = true
 vim.o.updatetime = 100
@@ -60,6 +63,9 @@ vim.keymap.set("n", "<Leader>/", ":let @/ = \"\"<CR>", { silent = true })
 vim.keymap.set("n", "<leader>y", ":%y<CR>")
 vim.keymap.set("n", "k", "v:count == 0 ? \"gk\" : \"k\"", { expr = true, silent = true })
 vim.keymap.set("n", "j", "v:count == 0 ? \"gj\" : \"j\"", { expr = true, silent = true })
+vim.keymap.set("n", "<Leader>l", ":vsplit term://fish <CR>", { silent = true })
+vim.keymap.set("t", "<Leader><Esc>", "<C-\\><C-n>", { silent = true })
+vim.keymap.set("n", "<Leader>v", ":edit ~/.config/nvim/lua/init.lua<CR>", { silent = true })
 
 local lang_maps = {
 	cpp = { build = "g++ % -o %:r", exec = "./%:r" },
@@ -79,7 +85,7 @@ for lang, data in pairs(lang_maps) do
 	end
 	vim.api.nvim_create_autocmd(
 		"FileType",
-		{ command = "nnoremap <leader>e :sp<CR>:ter " .. data.exec .. "<cr>", pattern = lang }
+		{ command = "nnoremap <leader>e :split<CR>:ter " .. data.exec .. "<cr>", pattern = lang }
 	)
 end
 vim.api.nvim_create_autocmd("BufWritePre", {
@@ -106,6 +112,50 @@ require("presence"):setup {
 
 vim.g.catppuccin_flavour = "mocha"
 vim.cmd "colorscheme catppuccin"
+
+local db = require "dashboard"
+db.custom_header = {
+	"",
+	"",
+	"",
+	"",
+	" ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗",
+	" ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║",
+	" ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║",
+	" ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║",
+	" ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║",
+	" ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝",
+	"",
+	"",
+	"",
+}
+db.custom_center = {
+	{
+		icon = " ",
+		desc = "New File            ",
+		action = "DashboardNewFile",
+		shortcut = "SPC m",
+	},
+	{
+		icon = " ",
+		desc = "Browse Files        ",
+		action = "Telescope file_browser",
+		shortcut = "SPC n",
+	},
+	{
+		icon = " ",
+		desc = "Find File           ",
+		action = "Telescope find_files",
+		shortcut = "SPC f",
+	},
+	{
+		icon = " ",
+		desc = "Configure Neovim    ",
+		action = "e ~/.config/nvim/lua/init.lua",
+		shortcut = "SPC v",
+	},
+}
+vim.keymap.set("n", "<Leader>m", ":DashboardNewFile<CR>", { silent = true })
 
 local luasnip = require "luasnip"
 local cmp = require "cmp"
@@ -158,7 +208,6 @@ require("nvim-lsp-installer").on_server_ready(function(server)
 			vim.keymap.set("n", "<Leader>h", vim.lsp.buf.hover, opts)
 			vim.keymap.set("n", "<Leader>i", vim.lsp.buf.definition, opts)
 			vim.keymap.set("n", "<Leader>r", vim.lsp.buf.rename, opts)
-			vim.keymap.set("n", "<Leader>f", vim.lsp.buf.formatting, opts)
 			local should_format = true
 			for _, value in pairs(has_formatter) do
 				if client.name == value then
@@ -245,7 +294,8 @@ require("lualine").setup {
 	},
 }
 
-require("telescope").setup {
+local telescope = require "telescope"
+telescope.setup {
 	defaults = {
 		mappings = { n = { ["o"] = require("telescope.actions").select_default } },
 		initial_mode = "normal",
@@ -254,7 +304,10 @@ require("telescope").setup {
 	},
 	pickers = { find_files = { hidden = true } },
 }
-vim.keymap.set("n", "<Leader>n", require("telescope.builtin").find_files)
+telescope.load_extension "file_browser"
+vim.keymap.set("n", "<Leader>n", telescope.extensions.file_browser.file_browser)
+vim.keymap.set("n", "<Leader>f", require("telescope.builtin").find_files)
+vim.keymap.set("n", "<Leader>t", require("telescope.builtin").treesitter)
 
 require("nvim-treesitter.configs").setup {
 	ensure_installed = { "bash", "cpp", "css", "go", "html", "lua", "python", "tsx", "typescript", "yaml" },
