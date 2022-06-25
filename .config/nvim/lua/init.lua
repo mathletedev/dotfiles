@@ -55,10 +55,7 @@ vim.keymap.set("n", "<Leader>d", "<C-w>l")
 vim.keymap.set("n", "<Leader>j", ":bp<CR>", { silent = true })
 vim.keymap.set("n", "<Leader>k", ":bn<CR>", { silent = true })
 vim.keymap.set("n", "<Leader>q", ":bp<CR>:bd #<CR>", { silent = true })
-vim.keymap.set("n", "<Leader>h", vim.lsp.buf.hover)
-vim.keymap.set("n", "<Leader>i", vim.lsp.buf.definition)
-vim.keymap.set("n", "<Leader>r", vim.lsp.buf.rename)
-vim.keymap.set("n", "<Leader>f", vim.lsp.buf.formatting)
+vim.keymap.set("n", "<Leader>x", vim.diagnostic.open_float)
 vim.keymap.set("n", "<Leader>/", ":let @/ = \"\"<CR>", { silent = true })
 vim.keymap.set("n", "<leader>y", ":%y<CR>")
 vim.keymap.set("n", "k", "v:count == 0 ? \"gk\" : \"k\"", { expr = true, silent = true })
@@ -87,7 +84,7 @@ for lang, data in pairs(lang_maps) do
 end
 vim.api.nvim_create_autocmd("BufWritePre", {
 	command = "lua vim.lsp.buf.formatting_sync(nil, 1000)",
-	pattern = "*.cpp,*.css,*.html,*.js,*.json,*.jsx,*.lua,*.md,*.py,*.ts,*.tsx,*.yaml",
+	pattern = "*.cpp,*.css,*.go,*.html,*.js,*.json,*.jsx,*.lua,*.md,*.py,*.ts,*.tsx,*.yaml",
 })
 vim.api.nvim_create_autocmd("InsertEnter", { command = "set norelativenumber", pattern = "*" })
 vim.api.nvim_create_autocmd("InsertLeave", { command = "set relativenumber", pattern = "*" })
@@ -139,8 +136,8 @@ cmp.setup {
 	sources = { { name = "nvim_lsp" }, { name = "luasnip" } },
 }
 
-local servers = { "bashls", "clangd", "cssls", "pyright", "sumneko_lua", "tsserver" }
-local has_formatter = { "tsserver", "sumneko_lua" }
+local servers = { "bashls", "clangd", "cssls", "gopls", "pyright", "sumneko_lua", "tailwindcss", "tsserver" }
+local has_formatter = { "gopls", "sumneko_lua", "tsserver" }
 for _, name in pairs(servers) do
 	local found, server = require("nvim-lsp-installer").get_server(name)
 	if found and not server:is_installed() then
@@ -185,6 +182,8 @@ null_ls.setup {
 	sources = {
 		null_ls.builtins.diagnostics.eslint_d,
 		null_ls.builtins.formatting.autopep8,
+		null_ls.builtins.formatting.eslint_d,
+		null_ls.builtins.formatting.gofmt,
 		null_ls.builtins.formatting.prettierd,
 		null_ls.builtins.formatting.stylua,
 	},
@@ -258,7 +257,7 @@ require("telescope").setup {
 vim.keymap.set("n", "<Leader>n", require("telescope.builtin").find_files)
 
 require("nvim-treesitter.configs").setup {
-	ensure_installed = { "bash", "cpp", "css", "html", "lua", "python", "tsx", "typescript", "yaml" },
+	ensure_installed = { "bash", "cpp", "css", "go", "html", "lua", "python", "tsx", "typescript", "yaml" },
 	highlight = { enable = true },
 }
 
