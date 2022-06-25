@@ -90,10 +90,10 @@ vim.api.nvim_create_autocmd("InsertEnter", { command = "set norelativenumber", p
 vim.api.nvim_create_autocmd("InsertLeave", { command = "set relativenumber", pattern = "*" })
 vim.api.nvim_create_autocmd("TermOpen", { command = "startinsert", pattern = "*" })
 
-vim.cmd [[sign define DiagnosticSignError text=● texthl=DiagnosticSignError]]
-vim.cmd [[sign define DiagnosticSignWarn text=● texthl=DiagnosticSignWarn]]
-vim.cmd [[sign define DiagnosticSignInfo text=● texthl=DiagnosticSignInfo]]
-vim.cmd [[sign define DiagnosticSignHint text=● texthl=DiagnosticSignHint]]
+vim.cmd "sign define DiagnosticSignError text=● texthl=DiagnosticSignError"
+vim.cmd "sign define DiagnosticSignWarn text=● texthl=DiagnosticSignWarn"
+vim.cmd "sign define DiagnosticSignInfo text=● texthl=DiagnosticSignInfo"
+vim.cmd "sign define DiagnosticSignHint text=● texthl=DiagnosticSignHint"
 
 require("presence"):setup {
 	neovim_image_text = "Neovim",
@@ -105,7 +105,7 @@ require("presence"):setup {
 }
 
 vim.g.catppuccin_flavour = "mocha"
-vim.cmd [[colorscheme catppuccin]]
+vim.cmd "colorscheme catppuccin"
 
 local luasnip = require "luasnip"
 local cmp = require "cmp"
