@@ -80,12 +80,12 @@ for lang, data in pairs(lang_maps) do
 	if data.build ~= nil then
 		vim.api.nvim_create_autocmd(
 			"FileType",
-			{ command = "nnoremap <leader>b :!" .. data.build .. "<cr>", pattern = lang }
+			{ command = "nnoremap <leader>b :!" .. data.build .. "<CR>", pattern = lang }
 		)
 	end
 	vim.api.nvim_create_autocmd(
 		"FileType",
-		{ command = "nnoremap <leader>e :split<CR>:ter " .. data.exec .. "<cr>", pattern = lang }
+		{ command = "nnoremap <leader>e :split<CR>:ter " .. data.exec .. "<CR>", pattern = lang }
 	)
 end
 vim.api.nvim_create_autocmd("BufWritePre", {
@@ -151,8 +151,13 @@ db.custom_center = {
 	{
 		icon = " ",
 		desc = "Configure Neovim    ",
-		action = "e ~/.config/nvim/lua/init.lua",
+		action = "edit ~/.config/nvim/lua/init.lua",
 		shortcut = "SPC v",
+	},
+	{
+		icon = " ",
+		desc = "Exit Neovim              ",
+		action = "quit",
 	},
 }
 vim.keymap.set("n", "<Leader>m", ":DashboardNewFile<CR>", { silent = true })
