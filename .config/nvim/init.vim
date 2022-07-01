@@ -1,1 +1,1 @@
-lua require('init')
+lua require "init"
