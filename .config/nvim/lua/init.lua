@@ -80,12 +80,12 @@ for lang, data in pairs(lang_maps) do
 	if data.build ~= nil then
 		vim.api.nvim_create_autocmd(
 			"FileType",
-			{ command = "nnoremap <leader>b :!" .. data.build .. "<CR>", pattern = lang }
+			{ command = "nnoremap <Leader>b :!" .. data.build .. "<CR>", pattern = lang }
 		)
 	end
 	vim.api.nvim_create_autocmd(
 		"FileType",
-		{ command = "nnoremap <leader>e :split<CR>:ter " .. data.exec .. "<CR>", pattern = lang }
+		{ command = "nnoremap <Leader>e :split<CR>:ter " .. data.exec .. "<CR>", pattern = lang }
 	)
 end
 vim.api.nvim_create_autocmd("BufWritePre", {
