@@ -90,11 +90,12 @@ for lang, data in pairs(lang_maps) do
 end
 vim.api.nvim_create_autocmd("BufWritePre", {
 	command = "lua vim.lsp.buf.formatting_sync(nil, 1000)",
-	pattern = "*.cpp,*.css,*.go,*.html,*.js,*.json,*.jsx,*.lua,*.md,*.py,*.ts,*.tsx,*.yaml",
+	pattern = "*.cpp,*.css,*.go,*.h,*.html,*.js,*.json,*.jsx,*.lua,*.md,*.py,*.rs,*.ts,*.tsx,*.yaml",
 })
 vim.api.nvim_create_autocmd("InsertEnter", { command = "set norelativenumber", pattern = "*" })
 vim.api.nvim_create_autocmd("InsertLeave", { command = "set relativenumber", pattern = "*" })
 vim.api.nvim_create_autocmd("TermOpen", { command = "startinsert", pattern = "*" })
+vim.api.nvim_create_autocmd("BufWinEnter", { command = "set noexpandtab tabstop=2 shiftwidth=2", pattern = "*.rs" })
 
 vim.cmd "sign define DiagnosticSignError text=● texthl=DiagnosticSignError"
 vim.cmd "sign define DiagnosticSignWarn text=● texthl=DiagnosticSignWarn"
@@ -134,7 +135,7 @@ db.custom_center = {
 		icon = " ",
 		desc = "New File            ",
 		action = "DashboardNewFile",
-		shortcut = "SPC m",
+		shortcut = "SPC o",
 	},
 	{
 		icon = " ",
@@ -160,7 +161,7 @@ db.custom_center = {
 		action = "quit",
 	},
 }
-vim.keymap.set("n", "<Leader>m", ":DashboardNewFile<CR>", { silent = true })
+vim.keymap.set("n", "<Leader>o", ":DashboardNewFile<CR>", { silent = true })
 
 local luasnip = require "luasnip"
 local cmp = require "cmp"
@@ -191,8 +192,18 @@ cmp.setup {
 	sources = { { name = "nvim_lsp" }, { name = "luasnip" } },
 }
 
-local servers = { "bashls", "clangd", "cssls", "gopls", "pyright", "sumneko_lua", "tailwindcss", "tsserver" }
-local has_formatter = { "gopls", "sumneko_lua", "tsserver" }
+local servers = {
+	"bashls",
+	"clangd",
+	"cssls",
+	"gopls",
+	"pyright",
+	"rust_analyzer",
+	"sumneko_lua",
+	"tailwindcss",
+	"tsserver",
+}
+local has_formatter = { "gopls", "rust_analyzer", "sumneko_lua", "tsserver" }
 for _, name in pairs(servers) do
 	local found, server = require("nvim-lsp-installer").get_server(name)
 	if found and not server:is_installed() then
@@ -239,6 +250,7 @@ null_ls.setup {
 		null_ls.builtins.formatting.eslint_d,
 		null_ls.builtins.formatting.gofmt,
 		null_ls.builtins.formatting.prettierd,
+		null_ls.builtins.formatting.rustfmt,
 		null_ls.builtins.formatting.stylua,
 	},
 }
@@ -315,7 +327,20 @@ vim.keymap.set("n", "<Leader>f", require("telescope.builtin").find_files)
 vim.keymap.set("n", "<Leader>t", require("telescope.builtin").treesitter)
 
 require("nvim-treesitter.configs").setup {
-	ensure_installed = { "bash", "cpp", "css", "go", "html", "lua", "python", "tsx", "typescript", "yaml" },
+	ensure_installed = {
+		"bash",
+		"cpp",
+		"css",
+		"go",
+		"html",
+		"lua",
+		"make",
+		"python",
+		"rust",
+		"tsx",
+		"typescript",
+		"yaml",
+	},
 	highlight = { enable = true },
 }
 

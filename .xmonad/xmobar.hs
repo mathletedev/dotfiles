@@ -1,7 +1,7 @@
 Config {
 	font = "xft:Ubuntu:weight=bold:pixelsize=12:antialias=true:hinting=true",
 	additionalFonts = ["xft:Font Awesome 6 Free Solid:pixelsize=12"]
-	position = Static { xpos = 10 , ypos = 10, width = 1660, height = 24 },
+	position = Static { xpos = 10, ypos = 10, width = 1660, height = 24 },
 	bgColor = "#1e1e2e",
 	fgColor = "#cdd6f4",
 	lowerOnStart = True,
