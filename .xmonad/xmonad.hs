@@ -9,6 +9,7 @@ import XMonad.Actions.SpawnOn
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.GridVariants
 import XMonad.Layout.LayoutCombinators
 import XMonad.Layout.Renamed
@@ -21,16 +22,20 @@ import XMonad.Util.Run
 import Graphics.X11.ExtraTypes.XF86
 
 myTerminal = "kitty"
+
 myBrowser = "firefox-developer-edition"
 
 myModMask = mod4Mask
 
-myBorderWidth = 4
-myBorderColor = "#313244"
+myBorderWidth = 0
 
 myWorkspaces = [" <fn=1>\xf015</fn> ", " <fn=1>\xf1c9</fn> ", " <fn=1>\xf0ac</fn> ", " <fn=1>\xf4ad</fn> ", " <fn=1>\xf7d9</fn> ", " <fn=1>\xf233</fn> "]
 
 mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True
+
+myManageHook = composeAll [
+	title =? "kitty" --> doRectFloat (W.RationalRect 0.375 0.375 0.25 0.25)
+	] <+> manageDocks <+> manageSpawn
 
 tall =
 	renamed [Replace "tall"] $
@@ -54,17 +59,37 @@ full =
 
 myLayoutHook = avoidStruts $ tall ||| wide ||| grid ||| full
 
-toggleFloat w = windows (\s ->
- 	if M.member w (W.floating s)
- 		then W.sink w s
-		else (W.float w (W.RationalRect (1 / 3) (1 / 4) (1 / 2) (1 / 2)) s)
-	)
+myHandleEventHook = handleEventHook def <+> docksEventHook <+> fullscreenEventHook
+
+myStartupHook = do
+	spawnOn (myWorkspaces !! 0) "notion-app"
+	spawnOn (myWorkspaces !! 1) "kitty"
+	spawnOn (myWorkspaces !! 2) "firefox-developer-edition"
+	spawnOn (myWorkspaces !! 4) "dolphin"
+	spawnOn (myWorkspaces !! 5) "systemsettings"
 
 myLayoutPrinter "tall" = "<fn=1>\xf338</fn>"
 myLayoutPrinter "wide" = "<fn=1>\xf337</fn>"
 myLayoutPrinter "grid" = "<fn=1>\xf047</fn>"
 myLayoutPrinter "full" = "<fn=1>\xf31e</fn>"
 myLayoutPrinter x = x
+
+myLogHook xmproc = dynamicLogWithPP $ xmobarPP {
+	ppOutput = hPutStrLn xmproc,
+	ppCurrent = xmobarColor "#89b4fa" "" . wrap "<box type=Bottom width=2 mb=2>" "</box>",
+	ppHidden = xmobarColor "#45475a" "" . wrap "<box type=Bottom width=2 mb=2>" "</box>",
+	ppHiddenNoWindows = xmobarColor "#313244" "",
+	ppUrgent = xmobarColor "#f38ba8" "" . wrap "<box type=Bottom width=2 mb=2>" "</box>",
+	ppTitle = xmobarColor "#cdd6f4" "" . shorten 100,
+	ppLayout = xmobarColor "#cba6f7" "" . myLayoutPrinter,
+	ppSep = "  "
+	}
+
+toggleFloat w = windows (\s ->
+ 	if M.member w (W.floating s)
+ 		then W.sink w s
+		else (W.float w (W.RationalRect (1 / 3) (1 / 4) (1 / 2) (1 / 2)) s)
+	)
 
 myKeys = [
 	("M-c", kill1),
@@ -83,33 +108,16 @@ myKeys = [
 	("<XF86AudioMute>", spawn "amixer set Master toggle")
 	]
 
-myStartupHook = do
-	spawnOn (myWorkspaces !! 0) "notion-app"
-	spawnOn (myWorkspaces !! 1) "kitty -e nvim"
-	spawnOn (myWorkspaces !! 1) "kitty"
-	spawnOn (myWorkspaces !! 2) "firefox-developer-edition"
-
 main = do
 	xmproc <- spawnPipe "xmobar ~/.xmonad/xmobar.hs"
 	xmonad $ ewmh $ def {
 		terminal = myTerminal,
 		modMask = myModMask,
 		borderWidth = myBorderWidth,
-		focusedBorderColor = myBorderColor,
-		normalBorderColor = myBorderColor,
 		workspaces = myWorkspaces,
-		manageHook = manageHook def <+> manageDocks <+> manageSpawn,
+		manageHook = myManageHook,
 		layoutHook = myLayoutHook,
-		handleEventHook = handleEventHook def <+> docksEventHook <+> fullscreenEventHook,
+		handleEventHook = myHandleEventHook,
 		startupHook = myStartupHook,
-		logHook = dynamicLogWithPP $ xmobarPP {
-			ppOutput = hPutStrLn xmproc,
-			ppCurrent = xmobarColor "#89b4fa" "" . wrap "<box type=Bottom width=2 mb=2>" "</box>",
-			ppHidden = xmobarColor "#45475a" "" . wrap "<box type=Bottom width=2 mb=2>" "</box>",
-			ppHiddenNoWindows = xmobarColor "#313244" "",
-			ppUrgent = xmobarColor "#f38ba8" "" . wrap "<box type=Bottom width=2 mb=2>" "</box>",
-			ppTitle = xmobarColor "#cdd6f4" "" . shorten 100,
-			ppLayout = xmobarColor "#cba6f7" "" . myLayoutPrinter,
-			ppSep = "  "
-		}
+		logHook = myLogHook xmproc
 	} `additionalKeysP` myKeys
