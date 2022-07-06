@@ -1,4 +1,4 @@
 function fish_greeting
-	neofetch
-	fortune
+	echo
+	pfetch
 end

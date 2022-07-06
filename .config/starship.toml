@@ -1,6 +1,4 @@
-format = "[┌](bold green) $all$line_break[│](bold green)$line_break[└](bold green) $character"
+add_newline = false
 
-[character]
-success_symbol = "[λ](bold blue)"
-error_symbol = "[ε](bold red)"
-vicmd_symbol = "[δ](bold purple)"
+[line_break]
+disabled = true

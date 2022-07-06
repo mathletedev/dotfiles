@@ -1,6 +1,7 @@
 set PATH ~/bin $PATH
-set -gx EDITOR nvim
 set -g theme_color_scheme nord
+set -gx EDITOR nvim
+set -gx PF_INFO "ascii title os uptime pkgs wm editor shell"
 
 abbr -a -- - "cd -"
 abbr -a -- n "kitty &"
