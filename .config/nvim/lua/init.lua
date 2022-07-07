@@ -75,6 +75,10 @@ local lang_maps = {
 	sh = { exec = "./%" },
 	go = { build = "go build", exec = "go run %" },
 	rust = { exec = "cargo run" },
+	arduino = {
+		build = "arduino-cli compile --fqbn arduino:avr:uno %:r",
+		exec = "arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:uno %:r",
+	},
 }
 for lang, data in pairs(lang_maps) do
 	if data.build ~= nil then
