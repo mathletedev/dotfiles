@@ -105,7 +105,8 @@ myKeys = [
 	("M-t", withFocused toggleBorder <+> (withFocused $ windows . (flip W.float $ W.RationalRect 0 0 1 1))),
 	("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+ unmute"),
 	("<XF86AudioLowerVolume>", spawn "amixer set Master 5%- unmute"),
-	("<XF86AudioMute>", spawn "amixer set Master toggle")
+	("<XF86AudioMute>", spawn "amixer set Master toggle"),
+	("<Print>", spawn "spectacle")
 	]
 
 main = do
