@@ -102,7 +102,7 @@ myKeys = [
 	("M-b", spawn myBrowser),
 	("M-<Space>", sendMessage $ JumpToLayout "full"),
 	("M-f", withFocused toggleFloat),
-	("M-t", withFocused toggleBorder <+> (withFocused $ windows . (flip W.float $ W.RationalRect 0 0 1 1))),
+	("M-t", withFocused $ windows . (flip W.float $ W.RationalRect 0 0 1 1)),
 	("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+ unmute"),
 	("<XF86AudioLowerVolume>", spawn "amixer set Master 5%- unmute"),
 	("<XF86AudioMute>", spawn "amixer set Master toggle"),
