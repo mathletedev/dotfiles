@@ -1,3 +1,12 @@
+#!/bin/bash
+
 echo -n "> "
-read name
-eval "git add .; git commit -m \"$name\"; git push"
+read msg
+
+if [ $(pwd) == "/home/neo" ]
+then
+	dfs="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
+	eval "$dfs add . && $dfs commit -m \"$msg\" && $dfs push"
+else
+	eval "git add . && git commit -m \"$msg\" && git push"
+fi
