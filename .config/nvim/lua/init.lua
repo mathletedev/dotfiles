@@ -69,8 +69,8 @@ vim.keymap.set("n", "<Leader>v", ":edit ~/.config/nvim/lua/init.lua<CR>", { sile
 
 local lang_maps = {
 	cpp = { build = "g++ % -o %:r", exec = "./%:r" },
-	typescript = { exec = "deno run %" },
-	javascript = { exec = "deno run %" },
+	typescript = { build = "deno compile %", exec = "deno run %" },
+	javascript = { build = "deno compile %", exec = "deno run %" },
 	python = { exec = "python %" },
 	java = { build = "javac %", exec = "java %:r" },
 	sh = { exec = "./%" },
