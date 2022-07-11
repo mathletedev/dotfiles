@@ -59,8 +59,6 @@ full =
 
 myLayoutHook = avoidStruts $ tall ||| wide ||| grid ||| full
 
-myHandleEventHook = handleEventHook def <+> docksEventHook <+> fullscreenEventHook
-
 myStartupHook = do
 	spawnOn (myWorkspaces !! 0) "notion-app"
 	spawnOn (myWorkspaces !! 1) "kitty"
@@ -111,14 +109,13 @@ myKeys = [
 
 main = do
 	xmproc <- spawnPipe "xmobar ~/.xmonad/xmobar.hs"
-	xmonad $ ewmh $ def {
+	xmonad $ ewmhFullscreen . docks $ def {
 		terminal = myTerminal,
 		modMask = myModMask,
 		borderWidth = myBorderWidth,
 		workspaces = myWorkspaces,
 		manageHook = myManageHook,
 		layoutHook = myLayoutHook,
-		handleEventHook = myHandleEventHook,
 		startupHook = myStartupHook,
 		logHook = myLogHook xmproc
 	} `additionalKeysP` myKeys
