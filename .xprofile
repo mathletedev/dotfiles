@@ -1,3 +1,4 @@
+xrandr --output DP-2 --left-of VGA-1 &
 picom &
 setxkbmap -option caps:escape &
 xsetroot -cursor_name left_ptr &

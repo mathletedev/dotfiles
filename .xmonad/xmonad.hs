@@ -72,13 +72,14 @@ myLayoutPrinter "grid" = "<fn=1>\xf047</fn>"
 myLayoutPrinter "full" = "<fn=1>\xf31e</fn>"
 myLayoutPrinter x = x
 
-myLogHook xmproc = dynamicLogWithPP $ xmobarPP {
-	ppOutput = hPutStrLn xmproc,
+myLogHook xmproc0 xmproc1 = dynamicLogWithPP $ xmobarPP {
+	ppOutput = \x -> hPutStrLn xmproc0 x >> hPutStrLn xmproc1 x,
 	ppCurrent = xmobarColor "#89b4fa" "" . wrap "<box type=Bottom width=2 mb=2>" "</box>",
+	ppVisible = xmobarColor "#cba6f7" "" . wrap "<box type=Bottom width=2 mb=2>" "</box>",
 	ppHidden = xmobarColor "#45475a" "" . wrap "<box type=Bottom width=2 mb=2>" "</box>",
 	ppHiddenNoWindows = xmobarColor "#313244" "",
 	ppUrgent = xmobarColor "#f38ba8" "" . wrap "<box type=Bottom width=2 mb=2>" "</box>",
-	ppTitle = xmobarColor "#cdd6f4" "" . shorten 100,
+	ppTitle = xmobarColor "#cdd6f4" "" . shorten 60,
 	ppLayout = xmobarColor "#cba6f7" "" . myLayoutPrinter,
 	ppSep = "  "
 	}
@@ -108,7 +109,8 @@ myKeys = [
 	]
 
 main = do
-	xmproc <- spawnPipe "xmobar ~/.xmonad/xmobar.hs"
+	xmproc0 <- spawnPipe "xmobar -x 0 -p \"Static { xpos = 1290, ypos = 10, width = 1660, height = 24 }\" ~/.xmonad/xmobar.hs"
+	xmproc1 <- spawnPipe "xmobar -x 1 -p \"Static { xpos = 10, ypos = 10, width = 1260, height = 24 }\" ~/.xmonad/xmobar.hs"
 	xmonad $ ewmhFullscreen . docks $ def {
 		terminal = myTerminal,
 		modMask = myModMask,
@@ -117,5 +119,5 @@ main = do
 		manageHook = myManageHook,
 		layoutHook = myLayoutHook,
 		startupHook = myStartupHook,
-		logHook = myLogHook xmproc
+		logHook = myLogHook xmproc0 xmproc1
 	} `additionalKeysP` myKeys
