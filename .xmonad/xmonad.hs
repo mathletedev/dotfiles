@@ -60,7 +60,7 @@ full =
 myLayoutHook = avoidStruts $ tall ||| wide ||| grid ||| full
 
 myStartupHook = do
-	spawnOn (myWorkspaces !! 0) "firefox-developer-edition https://todoist.com"
+	spawnOn (myWorkspaces !! 0) "firefox-developer-edition https://todoist.com https://mail.proton.me/u/0/inbox"
 	spawnOn (myWorkspaces !! 1) "kitty"
 
 myLayoutPrinter "tall" = "<fn=1>\xf338</fn>"
