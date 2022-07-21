@@ -23,7 +23,7 @@ import Graphics.X11.ExtraTypes.XF86
 
 myTerminal = "kitty"
 
-myBrowser = "firefox-developer-edition"
+myBrowser = "brave"
 
 myModMask = mod4Mask
 
@@ -60,7 +60,7 @@ full =
 myLayoutHook = avoidStruts $ tall ||| wide ||| grid ||| full
 
 myStartupHook = do
-	spawnOn (myWorkspaces !! 0) "firefox-developer-edition https://todoist.com https://mail.proton.me/u/0/inbox"
+	spawnOn (myWorkspaces !! 0) (myBrowser ++ " https://todoist.com https://mail.proton.me/u/0/inbox")
 	spawnOn (myWorkspaces !! 1) "kitty"
 
 myLayoutPrinter "tall" = "<fn=1>\xf338</fn>"
