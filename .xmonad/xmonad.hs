@@ -61,7 +61,7 @@ myLayoutHook = avoidStruts $ tall ||| wide ||| grid ||| full
 
 myStartupHook = do
 	spawnOn (myWorkspaces !! 0) (myBrowser ++ " https://todoist.com https://mail.proton.me/u/0/inbox")
-	spawnOn (myWorkspaces !! 1) "kitty"
+	spawnOn (myWorkspaces !! 1) myTerminal
 
 myLayoutPrinter "tall" = "<fn=1>\xf338</fn>"
 myLayoutPrinter "wide" = "<fn=1>\xf337</fn>"
