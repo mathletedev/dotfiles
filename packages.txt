@@ -2,6 +2,7 @@ asciiquarium
 audacity
 autopep8
 bashtop
+brave-bin
 cava
 ccls
 cowsay
