@@ -18,6 +18,7 @@
 !.config/neofetch/config.conf
 !.config/nvim
 !.config/nvim/init.lua
+!.config/nvim/lua
 !.config/nvim/lua/init.lua
 !.config/nvim/lua/stylua.toml
 !.config/picom
@@ -32,6 +33,7 @@
 !.xmonad/xmobar.hs
 !.xmonad/xmonad.hs
 !.xprofile
+!LICENSE
 !README.md
 !bin
 !bin/aow
