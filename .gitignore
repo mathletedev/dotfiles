@@ -17,7 +17,7 @@
 !.config/neofetch
 !.config/neofetch/config.conf
 !.config/nvim
-!.config/nvim/init.vim
+!.config/nvim/init.lua
 !.config/nvim/lua/init.lua
 !.config/nvim/lua/stylua.toml
 !.config/picom
