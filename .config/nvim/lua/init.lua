@@ -31,9 +31,11 @@ require("packer").startup(function(use)
 	use "onsails/lspkind-nvim"
 	use "ryanoasis/vim-devicons"
 	use "saadparwaiz1/cmp_luasnip"
+	use "simrat39/rust-tools.nvim"
 	use "tpope/vim-commentary"
 	use "williamboman/nvim-lsp-installer"
 	use "windwp/nvim-autopairs"
+	use "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
 end)
 
 vim.o.clipboard = "unnamedplus"
@@ -58,7 +60,6 @@ vim.keymap.set("n", "<Leader>d", "<C-w>l")
 vim.keymap.set("n", "<Leader>j", ":bp<CR>", { silent = true })
 vim.keymap.set("n", "<Leader>k", ":bn<CR>", { silent = true })
 vim.keymap.set("n", "<Leader>q", ":bp<CR>:bd #<CR>", { silent = true })
-vim.keymap.set("n", "<Leader>x", vim.diagnostic.open_float)
 vim.keymap.set("n", "<Leader>/", ":let @/ = \"\"<CR>", { silent = true })
 vim.keymap.set("n", "<Leader>y", ":%y<CR>")
 vim.keymap.set("n", "k", "v:count == 0 ? \"gk\" : \"k\"", { expr = true, silent = true })
@@ -106,6 +107,8 @@ vim.cmd "sign define DiagnosticSignError text=● texthl=DiagnosticSignError"
 vim.cmd "sign define DiagnosticSignWarn text=● texthl=DiagnosticSignWarn"
 vim.cmd "sign define DiagnosticSignInfo text=● texthl=DiagnosticSignInfo"
 vim.cmd "sign define DiagnosticSignHint text=● texthl=DiagnosticSignHint"
+
+vim.diagnostic.config { virtual_text = false }
 
 require("presence"):setup {
 	neovim_image_text = "Neovim",
@@ -202,13 +205,14 @@ local servers = {
 	"clangd",
 	"cssls",
 	"gopls",
+	"html",
 	"pyright",
 	"rust_analyzer",
 	"sumneko_lua",
 	"tailwindcss",
 	"tsserver",
 }
-local has_formatter = { "gopls", "rust_analyzer", "sumneko_lua", "tsserver" }
+local has_formatter = { "gopls", "html", "rust_analyzer", "sumneko_lua", "tsserver" }
 for _, name in pairs(servers) do
 	local found, server = require("nvim-lsp-installer").get_server(name)
 	if found and not server:is_installed() then
@@ -349,6 +353,11 @@ require("nvim-treesitter.configs").setup {
 	highlight = { enable = true },
 }
 
+require("rust-tools").setup {}
+
 vim.keymap.set({ "n", "v" }, "<Leader>c", ":Commentary<CR>", { silent = true })
 
 require("nvim-autopairs").setup {}
+
+require("lsp_lines").setup {}
+vim.keymap.set("n", "<Leader>x", require("lsp_lines").toggle)
