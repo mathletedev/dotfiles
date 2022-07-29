@@ -57,10 +57,10 @@ vim.keymap.set("n", "<Leader>w", "<C-w>k")
 vim.keymap.set("n", "<Leader>a", "<C-w>h")
 vim.keymap.set("n", "<Leader>s", "<C-w>j")
 vim.keymap.set("n", "<Leader>d", "<C-w>l")
-vim.keymap.set("n", "<Leader>j", ":bp<CR>", { silent = true })
-vim.keymap.set("n", "<Leader>k", ":bn<CR>", { silent = true })
-vim.keymap.set("n", "<Leader>q", ":bp<CR>:bd #<CR>", { silent = true })
-vim.keymap.set("n", "<Leader>/", ":let @/ = \"\"<CR>", { silent = true })
+vim.keymap.set("n", "<Leader>j", ":bprevious<CR>", { silent = true })
+vim.keymap.set("n", "<Leader>k", ":bnext<CR>", { silent = true })
+vim.keymap.set("n", "<Leader>q", ":bprevious<CR>:bdelete #<CR>", { silent = true })
+vim.keymap.set("n", "<Leader>/", ":nohlsearch<CR>", { silent = true })
 vim.keymap.set("n", "<Leader>y", ":%y<CR>")
 vim.keymap.set("n", "k", "v:count == 0 ? \"gk\" : \"k\"", { expr = true, silent = true })
 vim.keymap.set("n", "j", "v:count == 0 ? \"gj\" : \"j\"", { expr = true, silent = true })
@@ -91,7 +91,7 @@ for lang, data in pairs(lang_maps) do
 	end
 	vim.api.nvim_create_autocmd(
 		"FileType",
-		{ command = "nnoremap <Leader>e :split<CR>:ter " .. data.exec .. "<CR>", pattern = lang }
+		{ command = "nnoremap <Leader>e :split<CR>:terminal " .. data.exec .. "<CR>", pattern = lang }
 	)
 end
 vim.api.nvim_create_autocmd("BufWritePre", {
