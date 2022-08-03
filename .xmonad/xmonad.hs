@@ -99,10 +99,13 @@ myKeys = [
 	("M-<Space>", sendMessage $ JumpToLayout "full"),
 	("M-f", withFocused toggleFloat),
 	("M-t", withFocused $ windows . (flip W.float $ W.RationalRect 0 0 1 1)),
+	("<Print>", spawn "spectacle"),
 	("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+ unmute"),
 	("<XF86AudioLowerVolume>", spawn "amixer set Master 5%- unmute"),
 	("<XF86AudioMute>", spawn "amixer set Master toggle"),
-	("<Print>", spawn "spectacle")
+	("<XF86Calculator>", spawn "kitty -e qalc"),
+	("<XF86HomePage>", spawn (myBrowser ++ " https://todoist.com")),
+	("<XF86Mail>", spawn (myBrowser ++ " https://mail.proton.me/u/0/inbox"))
 	]
 
 main = do
