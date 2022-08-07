@@ -1,4 +1,4 @@
-set PATH ~/bin $PATH
+set PATH ~/bin ~/.bun/bin $PATH
 set -g theme_color_scheme nord
 set -gx EDITOR nvim
 set -gx PF_INFO "ascii title os uptime pkgs wm shell editor"
