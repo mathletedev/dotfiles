@@ -39,5 +39,6 @@
 !bin/pokemonthink
 !bin/push
 !bin/setup
+!bin/tablet
 !bin/wpilib_launcher
 !packages.txt
