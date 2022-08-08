@@ -29,6 +29,7 @@ require("packer").startup(function(use)
 	use "nvim-telescope/telescope-file-browser.nvim"
 	use "nvim-treesitter/nvim-treesitter"
 	use "onsails/lspkind-nvim"
+	use "romainl/vim-cool"
 	use "ryanoasis/vim-devicons"
 	use "saadparwaiz1/cmp_luasnip"
 	use "simrat39/rust-tools.nvim"
@@ -43,6 +44,7 @@ vim.o.ignorecase = true
 vim.o.lazyredraw = true
 vim.o.number = true
 vim.o.relativenumber = true
+vim.o.scrolloff = 4
 vim.o.shiftwidth = 2
 vim.o.splitbelow = true
 vim.o.splitright = true
@@ -60,7 +62,6 @@ vim.keymap.set("n", "<Leader>d", "<C-w>l")
 vim.keymap.set("n", "<Leader>j", ":bprevious<CR>", { silent = true })
 vim.keymap.set("n", "<Leader>k", ":bnext<CR>", { silent = true })
 vim.keymap.set("n", "<Leader>q", ":bprevious<CR>:bdelete #<CR>", { silent = true })
-vim.keymap.set("n", "<Leader>/", ":nohlsearch<CR>", { silent = true })
 vim.keymap.set("n", "<Leader>y", ":%y<CR>")
 vim.keymap.set("n", "k", "gk", { silent = true })
 vim.keymap.set("n", "j", "gj", { silent = true })
