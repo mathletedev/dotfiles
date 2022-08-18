@@ -1,6 +1,9 @@
 *
 !.bashrc
 !.config
+!.config/bat
+!.config/bat/themes
+!.config/bat/themes/catppuccin.tmTheme
 !.config/cava
 !.config/cava/config
 !.config/dmenu
