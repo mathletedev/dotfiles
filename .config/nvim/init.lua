@@ -98,12 +98,13 @@ for lang, data in pairs(lang_maps) do
 end
 vim.api.nvim_create_autocmd("BufWritePre", {
 	command = "lua vim.lsp.buf.formatting_sync(nil, 1000)",
-	pattern = "*.cpp,*.css,*.go,*.h,*.html,*.js,*.json,*.jsx,*.lua,*.md,*.py,*.rs,*.ts,*.tsx,*.yaml",
+	pattern = "*.astro,*.cpp,*.css,*.go,*.h,*.html,*.js,*.json,*.jsx,*.lua,*.md,*.py,*.rs,*.ts,*.tsx,*.yaml",
 })
 vim.api.nvim_create_autocmd("InsertEnter", { command = "set norelativenumber", pattern = "*" })
 vim.api.nvim_create_autocmd("InsertLeave", { command = "set relativenumber", pattern = "*" })
 vim.api.nvim_create_autocmd("TermOpen", { command = "startinsert", pattern = "*" })
 vim.api.nvim_create_autocmd("BufWinEnter", { command = "set noexpandtab tabstop=2 shiftwidth=2", pattern = "*.rs" })
+vim.api.nvim_create_autocmd("BufWinEnter", { command = "set filetype=astro", pattern = "*.astro" })
 
 vim.cmd "sign define DiagnosticSignError text=● texthl=DiagnosticSignError"
 vim.cmd "sign define DiagnosticSignWarn text=● texthl=DiagnosticSignWarn"
@@ -290,6 +291,7 @@ vim.keymap.set("n", "<Leader>t", require("telescope.builtin").treesitter)
 
 require("nvim-treesitter.configs").setup {
 	ensure_installed = {
+		"astro",
 		"bash",
 		"cpp",
 		"css",
@@ -313,6 +315,7 @@ vim.keymap.set({ "n", "v" }, "<Leader>c", ":Commentary<CR>", { silent = true })
 require("mason").setup {}
 
 local servers = {
+	"astro",
 	"bashls",
 	"clangd",
 	"cssls",
