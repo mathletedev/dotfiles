@@ -206,7 +206,7 @@ cmp.setup {
 local null_ls = require "null-ls"
 null_ls.setup {
 	sources = {
-		null_ls.builtins.diagnostics.eslint_d,
+		null_ls.builtins.diagnostics.eslint_d.with { extra_filetypes = { "astro" } },
 		null_ls.builtins.formatting.autopep8,
 		null_ls.builtins.formatting.eslint_d,
 		null_ls.builtins.formatting.gofmt,
@@ -327,7 +327,6 @@ local servers = {
 	"tailwindcss",
 	"tsserver",
 }
-
 local has_formatter = { "gopls", "html", "rust_analyzer", "sumneko_lua", "tsserver" }
 require("mason-lspconfig").setup {
 	ensure_installed = servers,

@@ -27,9 +27,12 @@ Config {
 			("considerable cloudiness", "\xf740"),
 			("overcast", "\xf73d"),
 			("obscured", "\xf75f")
-		] ["-t", "<fc=#a6e3a1><fn=1>\xf2c9</fn>  <tempC>°C  <fn=1><skyConditionS></fn></fc>"] 18000,
+		] ["-t", "<action=`brave \"https://search.brave.com/search?q=weather\"`><fc=#a6e3a1><fn=1>\xf2c9</fn>  <tempC>°C  <fn=1><skyConditionS></fn></fc></action>"] 18000,
 		Run Date "<action=`kitty --hold -e cal -y`><fc=#89b4fa><fn=1>\xf133</fn>  %m/%d/%Y</fc></action>" "date" 36000,
-		Run DynNetwork ["-t", "<action=`kitty -e nmtui`><fc=#cba6f7><fn=1>\xf019</fn>  <rx> KB/s  <fn=1>\xf7c0</fn>  <tx> KB/s</fc></action>"] 20
+		Run DynNetwork [
+			"-t",
+			"<action=`kitty & sleep 0.5 && xdotool key super+f && sleep 0.5 && xdotool type \"nmtui\" && xdotool key enter`><fc=#cba6f7><fn=1>\xf019</fn>  <rx> KB/s  <fn=1>\xf7c0</fn>  <tx> KB/s</fc></action>"
+		] 20
 	],
 	sepChar = "%",
 	alignSep = "}{",

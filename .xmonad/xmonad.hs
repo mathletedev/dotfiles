@@ -97,6 +97,7 @@ myKeys = [
 	("M-<Return>", spawn myTerminal),
 	("M-b", spawn myBrowser),
 	("M-<Space>", sendMessage $ JumpToLayout "full"),
+	("M-g", sendMessage $ JumpToLayout "grid"),
 	("M-f", withFocused toggleFloat),
 	("M-t", withFocused $ windows . (flip W.float $ W.RationalRect 0 0 1 1)),
 	("<Print>", spawn "spectacle"),

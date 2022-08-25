@@ -1,11 +1,18 @@
 #!/bin/bash
 
+xdotool key super+g
 kitty -e cava &
 sleep 0.5
+xdotool key super+f
 kitty -e unimatrix -af -c blue -s 96 &
 sleep 0.5
+xdotool key super+f
 kitty -e tty-clock -c &
 sleep 0.5
+xdotool key super+f
 kitty -e bashtop &
 sleep 0.5
-kitty
+xdotool key super+f
+kitty &
+sleep 0.5
+xdotool key super+f
