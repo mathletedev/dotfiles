@@ -38,6 +38,7 @@
 !README.md
 !bin
 !bin/aow
+!bin/hashword
 !bin/pokemonsay
 !bin/pokemonthink
 !bin/push
