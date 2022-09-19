@@ -60,7 +60,8 @@ full =
 myLayoutHook = avoidStruts $ tall ||| wide ||| grid ||| full
 
 myStartupHook = do
-	spawnOn (myWorkspaces !! 0) (myBrowser ++ " https://todoist.com https://mail.proton.me/u/0/inbox")
+	spawnOn (myWorkspaces !! 0) (myBrowser ++ " https://mail.proton.me/u/0/inbox")
+	spawnOn (myWorkspaces !! 1) "notion-app"
 	spawnOn (myWorkspaces !! 1) myTerminal
 
 myLayoutPrinter "tall" = "<fn=1>\xf338</fn>"

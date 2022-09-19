@@ -208,7 +208,7 @@ null_ls.setup {
 	sources = {
 		null_ls.builtins.diagnostics.eslint_d.with { extra_filetypes = { "astro" } },
 		null_ls.builtins.formatting.autopep8,
-		null_ls.builtins.formatting.eslint_d,
+		null_ls.builtins.formatting.eslint_d.with { extra_filetypes = { "astro" } },
 		null_ls.builtins.formatting.gofmt,
 		null_ls.builtins.formatting.prettierd,
 		null_ls.builtins.formatting.rustfmt,
@@ -327,7 +327,7 @@ local servers = {
 	"tailwindcss",
 	"tsserver",
 }
-local has_formatter = { "gopls", "html", "rust_analyzer", "sumneko_lua", "tsserver" }
+local has_formatter = { "astro", "gopls", "html", "rust_analyzer", "sumneko_lua", "tsserver" }
 require("mason-lspconfig").setup {
 	ensure_installed = servers,
 	automatic_installation = true,
