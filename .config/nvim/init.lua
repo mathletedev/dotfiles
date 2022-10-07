@@ -97,7 +97,7 @@ for lang, data in pairs(lang_maps) do
 	)
 end
 vim.api.nvim_create_autocmd("BufWritePre", {
-	command = "lua vim.lsp.buf.formatting_sync(nil, 1000)",
+	command = "lua vim.lsp.buf.format()",
 	pattern = "*.astro,*.cpp,*.css,*.go,*.h,*.html,*.js,*.json,*.jsx,*.lua,*.md,*.py,*.rs,*.ts,*.tsx,*.yaml",
 })
 vim.api.nvim_create_autocmd("InsertEnter", { command = "set norelativenumber", pattern = "*" })
@@ -106,10 +106,10 @@ vim.api.nvim_create_autocmd("TermOpen", { command = "startinsert", pattern = "*"
 vim.api.nvim_create_autocmd("BufWinEnter", { command = "set noexpandtab tabstop=2 shiftwidth=2", pattern = "*.rs" })
 vim.api.nvim_create_autocmd("BufWinEnter", { command = "set filetype=astro", pattern = "*.astro" })
 
-vim.cmd "sign define DiagnosticSignError text=● texthl=DiagnosticSignError"
-vim.cmd "sign define DiagnosticSignWarn text=● texthl=DiagnosticSignWarn"
-vim.cmd "sign define DiagnosticSignInfo text=● texthl=DiagnosticSignInfo"
-vim.cmd "sign define DiagnosticSignHint text=● texthl=DiagnosticSignHint"
+vim.api.nvim_command "sign define DiagnosticSignError text=● texthl=DiagnosticSignError"
+vim.api.nvim_command "sign define DiagnosticSignWarn text=● texthl=DiagnosticSignWarn"
+vim.api.nvim_command "sign define DiagnosticSignInfo text=● texthl=DiagnosticSignInfo"
+vim.api.nvim_command "sign define DiagnosticSignHint text=● texthl=DiagnosticSignHint"
 
 vim.diagnostic.config { virtual_text = false }
 
@@ -123,7 +123,8 @@ require("presence"):setup {
 }
 
 vim.g.catppuccin_flavour = "mocha"
-vim.cmd "colorscheme catppuccin"
+require("catppuccin").setup()
+vim.api.nvim_command "colorscheme catppuccin"
 
 local db = require "dashboard"
 db.custom_header = {
@@ -228,7 +229,7 @@ require("gitsigns").setup {
 
 local lspconfig = require "lspconfig"
 
-local cp = require("catppuccin.core.palettes.init").get_palette()
+local cp = require("catppuccin.palettes").get_palette()
 local custom_catppuccin = require "lualine.themes.catppuccin"
 custom_catppuccin.normal.b.bg = cp.surface0
 custom_catppuccin.normal.c.bg = cp.base
@@ -346,7 +347,7 @@ local opts = {
 			end
 		end
 		if not should_format then
-			client.resolved_capabilities.document_formatting = false
+			client.server_capabilities.document_formatting = false
 		end
 	end,
 	capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
