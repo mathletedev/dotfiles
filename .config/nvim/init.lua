@@ -280,7 +280,7 @@ telescope.setup {
 	defaults = {
 		mappings = { n = { ["o"] = require("telescope.actions").select_default } },
 		initial_mode = "normal",
-		file_ignore_patterns = { ".git/", "node_modules/", "target/" },
+		file_ignore_patterns = { "dist/", ".git/", "node_modules/", "target/" },
 	},
 	pickers = { find_files = { hidden = true } },
 	extensions = { file_browser = { hidden = true } },
