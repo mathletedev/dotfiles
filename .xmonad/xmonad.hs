@@ -101,6 +101,7 @@ myKeys = [
 	("M-g", sendMessage $ JumpToLayout "grid"),
 	("M-f", withFocused toggleFloat),
 	("M-t", withFocused $ windows . (flip W.float $ W.RationalRect 0 0 1 1)),
+	("M-l", spawn "slock"),
 	("<Print>", spawn "spectacle"),
 	("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+ unmute"),
 	("<XF86AudioLowerVolume>", spawn "amixer set Master 5%- unmute"),
