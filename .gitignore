@@ -21,6 +21,13 @@
 !.config/neofetch/config.conf
 !.config/nvim
 !.config/nvim/init.lua
+!.config/nvim/lua
+!.config/nvim/lua/config.lua
+!.config/nvim/lua/libs.lua
+!.config/nvim/lua/maps.lua
+!.config/nvim/lua/opts.lua
+!.config/nvim/lua/servers.lua
+!.config/nvim/lua/utils.lua
 !.config/nvim/stylua.toml
 !.config/picom
 !.config/picom/picom.conf
