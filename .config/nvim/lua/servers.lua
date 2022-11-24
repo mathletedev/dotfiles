@@ -91,12 +91,26 @@ local servers = {
 	"tailwindcss",
 	"tsserver",
 }
-local has_formatter = { "astro", "gopls", "html", "rust_analyzer", "sumneko_lua", "tsserver" }
 
 require("mason-lspconfig").setup {
 	ensure_installed = servers,
 	automatic_installation = true,
 }
+
+local lsp_formatting = function(bufnr)
+	local deny_formatting = { "astro", "gopls", "html", "rust_analyzer", "sumneko_lua", "tsserver" }
+	vim.lsp.buf.format {
+		filter = function(client)
+			for _, value in pairs(deny_formatting) do
+				if client.name == value then
+					return false
+				end
+			end
+			return true
+		end,
+		bufnr = bufnr,
+	}
+end
 
 local opts = {
 	on_attach = function(client, bufnr)
@@ -107,15 +121,17 @@ local opts = {
 		vim.keymap.set("n", "<Leader>i", vim.lsp.buf.definition, opts)
 		vim.keymap.set("n", "<Leader>r", vim.lsp.buf.rename, opts)
 
-		local should_format = true
-		for _, value in pairs(has_formatter) do
-			if client.name == value then
-				should_format = false
-			end
-		end
+		if client.supports_method "textDocument/formatting" then
+			local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
-		if not should_format then
-			client.server_capabilities.document_formatting = false
+			vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				group = augroup,
+				buffer = bufnr,
+				callback = function()
+					lsp_formatting(bufnr)
+				end,
+			})
 		end
 	end,
 	capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),

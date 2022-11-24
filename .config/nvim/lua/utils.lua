@@ -27,11 +27,6 @@ for lang, data in pairs(lang_maps) do
 	)
 end
 
-vim.api.nvim_create_autocmd("BufWritePre", {
-	command = "lua vim.lsp.buf.format()",
-	pattern = "*.astro,*.cpp,*.css,*.go,*.h,*.html,*.js,*.json,*.jsx,*.lua,*.md,*.py,*.rs,*.ts,*.tsx,*.yaml",
-})
-
 vim.api.nvim_create_autocmd("InsertEnter", { command = "set norelativenumber", pattern = "*" })
 vim.api.nvim_create_autocmd("InsertLeave", { command = "set relativenumber", pattern = "*" })
 
