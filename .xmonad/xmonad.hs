@@ -29,7 +29,7 @@ myModMask = mod4Mask
 
 myBorderWidth = 0
 
-myWorkspaces = [" <fn=1>\xf015</fn> ", " <fn=1>\xf1c9</fn> ", " <fn=1>\xf0ac</fn> ", " <fn=1>\xf4ad</fn> ", " <fn=1>\xf7d9</fn> ", " <fn=1>\xf233</fn> "]
+myWorkspaces = ["<fn=1>\xf015</fn>", "<fn=1>\xf1c9</fn>", "<fn=1>\xf0ac</fn>", "<fn=1>\xf4ad</fn>", "<fn=1>\xf7d9</fn>", "<fn=1>\xf233</fn>"]
 
 mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True
 
@@ -79,7 +79,7 @@ myLogHook xmproc0 xmproc1 = dynamicLogWithPP $ xmobarPP {
 	ppUrgent = xmobarColor "#f38ba8" "" . wrap "<box type=Bottom width=2 mb=2>" "</box>",
 	ppTitle = xmobarColor "#cdd6f4" "" . shorten 60,
 	ppLayout = xmobarColor "#cba6f7" "" . myLayoutPrinter,
-	ppSep = "  "
+	ppSep = " "
 	}
 
 toggleFloat w = windows (\s ->
