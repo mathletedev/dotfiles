@@ -36,5 +36,5 @@ Config {
 	],
 	sepChar = "%",
 	alignSep = "}{",
-	template = " <action=`dmenu_run`><icon=sharingan.xpm/></action> %StdinReader%}%time%{%cpu% %memory% %alsa:default:Master% %KPUW% %date% %dynnetwork% "
+	template = " <action=`rofi -show drun`><icon=sharingan.xpm/></action> %StdinReader%}%time%{%cpu% %memory% %alsa:default:Master% %KPUW% %date% %dynnetwork% "
 }

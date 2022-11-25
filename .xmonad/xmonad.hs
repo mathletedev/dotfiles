@@ -61,7 +61,7 @@ myLayoutHook = avoidStruts $ tall ||| wide ||| grid ||| full
 
 myStartupHook = do
 	spawnOn (myWorkspaces !! 0) (myBrowser ++ " https://mail.proton.me/u/0/inbox")
-	spawnOn (myWorkspaces !! 1) "notion-app"
+	spawnOn (myWorkspaces !! 1) "obsidian"
 	spawnOn (myWorkspaces !! 1) myTerminal
 
 myLayoutPrinter "tall" = "<fn=1>\xf338</fn>"
@@ -89,6 +89,8 @@ toggleFloat w = windows (\s ->
 	)
 
 myKeys = [
+	("M-p", spawn "rofi -show drun"),
+	("M-r", spawn "rofi -show run"),
 	("M-c", kill1),
 	("M-<Tab>", sendMessage NextLayout),
 	("M-<Up>", sendMessage MirrorExpand),
